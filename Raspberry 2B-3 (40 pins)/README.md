@@ -2,8 +2,8 @@
 
 
 This file contains two project:
--SmartHouseRaspberryServer: 14 outputs 13 inputs ( if you want to use it with switches for example light switches ).
- -SmartHouseRaspberryServerOnlyOutputs: only outputs and no input ( 27 out 0 in).
+-SmartHouseRaspberryServer: 15 outputs 15 inputs ( if you want to use it with switches for example light switches ).
+ -SmartHouseRaspberryServerOnlyOutputs: only outputs and no input ( 30 out 0 in).
 
 In both project, you can send commands from your computer, android, wearable-watch device to your raspberry device (if you refactor the SH.java file this would be able to work in any device not only raspberry) you can connect as many raspberry devices as you want but all of them must be conected to the same local network ( the device you will use to send the command must also be on same local network ).
 

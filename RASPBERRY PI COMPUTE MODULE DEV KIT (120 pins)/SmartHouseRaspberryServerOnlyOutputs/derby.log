@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Fri Mar 11 22:15:37 EET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0153-6751-e01c-00000052cfc0 
+on database directory /home/pi/Desktop/github/SmartHouse/SmartHouseRaspberryServerOnlyOutputs/MY_SHEDULE_TABLE  with class loader sun.misc.Launcher$AppClassLoader@644d46 
+Loaded from file:/home/pi/Desktop/github/SmartHouse/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0-b132
+user.dir=/home/pi/Desktop/github/SmartHouse/SmartHouseRaspberryServerOnlyOutputs
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
