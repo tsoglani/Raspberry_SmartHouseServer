@@ -1,5 +1,10 @@
 
-import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.GpioController;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinDigitalOutput;
+
+import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import java.io.*;
@@ -205,25 +210,25 @@ public class SH {
                 pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i);
                 break;
                 case 1:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i);
                 break;
                 case 2:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
                 break;
                 case 3:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
                 break;
                 case 4:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i);
                 break;
                 case 5:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i);
                 break;
                 case 6:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_12, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "PinLED" + i);
                 break;
                 case 7:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_13, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i);
                 break;
                                      case 8:
                                          pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
