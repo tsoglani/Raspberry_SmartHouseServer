@@ -10,7 +10,9 @@ In both project, you can send commands from your computer, android, wearable-wat
 
 imports libs:
 
--sudo apt-get install pi4j or pi4j --update                    /// update the raspberry libs
+-sudo apt-get update                  ////--update
+-curl -s get.pi4j.com | sudo bash    ////--update
+-sudo apt-get install pi4j or pi4j   ////--update                    /// update the raspberry libs
 - imports all libraries from  /opt/pi4j/lib                   /// tools->preferences->Libraries->Add
 - imports derby.jar and derbyclient.jar from poject's folder /// tools->preferences->Libraries->Add
 - restart bluej
@@ -41,8 +43,8 @@ How to run the application on raspberry startup :
 Extract on Jar file with BlueJ on Raspberry side. 
 -Project-> Create Jar File.
 -then select SH as "Main Class" and include all pi4j libraries on " Include User Libraries", if there are duplicate 
-libraries(.jar) add only one, DO NOT add lib with same title twice (possible duplicated libs 'pi4j-device.jar','pi4j-service.jar','pi4j-core.jar'),
-try adding the first lib pair 'pi4j-device.jar','pi4j-service.jar' and 'pi4j-core.jar'
+libraries(.jar) add only one, DO NOT add lib with same title twice (possible duplicated libs 'pi4j-device.jar','pi4j-service.jar','pi4j-gpio-extension.jar','pi4j-core.jar'),
+try adding the first lib pair 'pi4j-device.jar','pi4j-service.jar', 'pi4j-gpio-extension.jar' and 'pi4j-core.jar'
  (if this doesn't work try the second lib pair, see if this is working by running it from cmd 'sudo java -jar file_name.jar' if this doesn't work you will see throwing an exception (about gpio_21))
 -Save it with name "SmartHouseServer" on Desktop (or you have to change it on script-see below).
 - In case you face the following problem on jar exstraction :  Unsupported major.minor version 52.0
