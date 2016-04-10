@@ -51,7 +51,7 @@ try adding the first lib pair 'pi4j-device.jar','pi4j-service.jar', 'pi4j-gpio-e
 you can download and install : "http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html"
 
 - you  need to change permission on storage file, for example in cmd (command line), you have to change the permission status on /etc/rc.local by writting: 
- "sudo chmod -R 777 /etc//etc/rc.local/"
+ "sudo chmod -R 777 /etc/rc.local"
 
 As soon as you do that you will be able to apply the "write and read" permission which will enable you to modify the " /etc/rc.local" file and write the following script.
 
