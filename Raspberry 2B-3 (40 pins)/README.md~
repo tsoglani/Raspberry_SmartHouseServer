@@ -2,16 +2,17 @@
 
 
 This file contains two project:
--SmartHouseRaspberryServer: 23 outputs 23 inputs ( if you want to use it with switches for example light switches ).
- -SmartHouseRaspberryServerOnlyOutputs: only outputs and no input ( 46 out 0 in).
+-SmartHouseRaspberryServer: 15 outputs 15 inputs ( if you want to use it with switches for example light switches ).
+ -SmartHouseRaspberryServerOnlyOutputs: only outputs and no input ( 30 out 0 in).
 
 In both project, you can send commands from your computer, android, wearable-watch device to your raspberry device (if you refactor the SH.java file this would be able to work in any device not only raspberry) you can connect as many raspberry devices as you want but all of them must be conected to the same local network ( the device you will use to send the command must also be on same local network ).
+
 
 imports libs:
 
 -sudo apt-get update                  ////--update
 -curl -s get.pi4j.com | sudo bash    ////--update
--sudo apt-get install pi4j or pi4j   ////--update                /// update the raspberry libs
+-sudo apt-get install pi4j or pi4j   ////--update                    /// update the raspberry libs
 - imports all libraries from  /opt/pi4j/lib                   /// tools->preferences->Libraries->Add
 - imports derby.jar and derbyclient.jar from poject's folder /// tools->preferences->Libraries->Add
 - restart bluej
@@ -39,7 +40,6 @@ Steps to run it:
 
 How to run the application on raspberry startup :
 
-
 Extract on Jar file with BlueJ on Raspberry side. 
 -Project-> Create Jar File.
 -then select SH as "Main Class" and include all pi4j libraries on " Include User Libraries", if there are duplicate 
@@ -47,8 +47,6 @@ libraries(.jar) add only one, DO NOT add lib with same title twice (possible dup
 try adding the first lib pair 'pi4j-device.jar','pi4j-service.jar', 'pi4j-gpio-extension.jar' and 'pi4j-core.jar'
  (if this doesn't work try the second lib pair, see if this is working by running it from cmd 'sudo java -jar file_name.jar' if this doesn't work you will see throwing an exception (about gpio_21))
 -Save it with name "SmartHouseServer" on Desktop (or you have to change it on script-see below).
-https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/images/12998194_10154109207358185_1366117902706159433_o.jpg
-
 - In case you face the following problem on jar exstraction :  Unsupported major.minor version 52.0
 you can download and install : "http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html"
 
