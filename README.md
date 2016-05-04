@@ -1,7 +1,7 @@
 # Raspberry_SmartHouseServer
 
 
-This Folder contains Raspberry projects for remote smart house application (enable or dissable any electrical device you want remotely), you have to download all of them and choose the project you want to use according your raspberry device and your needs.
+This Folder contains Raspberry projects for remote smart house application (enable or dissable any electrical device you want remotely), you have to download this Folder, in this folder there are 6 project (two for each raspberry device)  choose the project you want to use according your raspberry device and your needs.
 
 
 There are three folders:
