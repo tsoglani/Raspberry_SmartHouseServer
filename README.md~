@@ -21,7 +21,7 @@ After you download and run the selected project, you would be able to control re
 NOTE : need to have Java sdk to your computer device (if not, this is the link -> http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
 -Paid (Android phone- Android wear(watch)): "https://play.google.com/store/apps/details?id=com.smart.tsoglani.smarthouse
-Note : download free testing version to be sure that is working for you before pay version.
+Note : download free testing version before buy it to be sure that is working for you.
 
 
 
