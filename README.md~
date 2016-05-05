@@ -1,7 +1,7 @@
 # Raspberry_SmartHouseServer
 
 
-This Folder contains Raspberry projects for remote smart house application (enable or dissable any electrical device you want remotely), you have to download this Folder, in this folder there are 6 project (two for each raspberry device)  choose the project you want to use according your raspberry device and your needs.
+This Folder contains Raspberry projects for remote smart house application (enable or dissable any electrical device you want remotely), you have to download this Folder, in this folder there are 6 projects (two for each raspberry device)  choose the project you want to use according to your Raspberry device and your needs.
 
 
 In this folder there are three folders:
@@ -10,12 +10,27 @@ In this folder there are three folders:
  -RASPBERRY PI COMPUTE MODULE DEV KIT (120 pins)
 open the folder you have to use according your raspberry device.
 
-After this you will see two Folder, each folder contains one Project, the project you have to see are:
+After this you will see two Folder, each folder contains one Project, the projects you have to see are:
  -SmartHouseRaspberryServer: the outputs and the inputs have been split in half.
  -SmartHouseRaspberryServerOnlyOutputs: all pins have been used as ouptputs and you have no inputs ( for example light switch). 
 
 
+After you download and run the selected project, you would be able to control remotely your raspberry device with the applications below:
+
+-Free (beta) works on any computer device: "https://github.com/tsoglani/Java_SmartHouseClient/blob/master/SmartHouseClient/dist/SmartHouseClient.jar".       
+NOTE : need to have Java sdk to your computer device (if not, this is the link -> http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+-Paid (Android phone- Android wear(watch)): "https://play.google.com/store/apps/details?id=com.smart.tsoglani.smarthouse
+Note : download free testing version to be sure that is working for you before pay version.
+
+
+
 Select the project you need.
+
 In every "main" folder there is a read me file with instructions.
+
+
+
+
 Good luck ;)
 
