@@ -42,6 +42,9 @@ public class SH {
  ///** 
  // these are the commannds that each device can receive and react,
  // so every outputPowerCommand must be unique in every device contected in local network.
+
+
+// on addCommandsAndPorts function RECOMENDER LOWER CASE TEXT 
     private void initializePowerCommands(){
     
         
@@ -113,7 +116,7 @@ public class SH {
      
     protected ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=27;// 0 - 27
+    private final int raspberryOutputs=30;// 0 - 27
     protected ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];

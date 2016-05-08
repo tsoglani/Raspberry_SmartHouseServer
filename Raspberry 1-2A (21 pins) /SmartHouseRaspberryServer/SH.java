@@ -36,6 +36,10 @@ public class SH {
     ///** 
     // these are the commannds that each device can receive and react,
     // so every outputPowerCommand must be unique in every device contected in local network.
+
+
+
+// on addCommandsAndPorts function RECOMENDER LOWER CASE TEXT 
     private void initializePowerCommands(){
 
         for(int i=0 ;i<NumberOfBindingCommands;i++){

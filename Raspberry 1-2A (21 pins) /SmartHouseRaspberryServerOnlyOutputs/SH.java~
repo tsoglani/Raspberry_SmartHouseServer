@@ -42,9 +42,6 @@ public class SH {
  ///** 
  // these are the commannds that each device can receive and react,
  // so every outputPowerCommand must be unique in every device contected in local network.
-
-
-// on addCommandsAndPorts function RECOMENDER LOWER CASE TEXT 
     private void initializePowerCommands(){
     
         
@@ -116,7 +113,7 @@ public class SH {
      
     protected ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=27;// 0 - 27
+    private final int raspberryOutputs=21;// 0 - 20
     protected ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
@@ -260,33 +257,6 @@ GpioPinDigitalOutput pin=null;
                         break;
                     case 20:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i);
-                        break;
-  case 21:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, "PinLED" + i);
-                        break;
-  case 22:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_22, "PinLED" + i);
-                        break;
-  case 23:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "PinLED" + i);
-                        break;
-  case 24:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_24, "PinLED" + i);
-                        break;
-  case 25:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "PinLED" + i);
-                        break;
-  case 26:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "PinLED" + i);
-                        break;
-  case 27:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "PinLED" + i);
-                        break;
-  case 28:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "PinLED" + i);
-                        break;
-  case 29:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "PinLED" + i);
                         break;
                  
 

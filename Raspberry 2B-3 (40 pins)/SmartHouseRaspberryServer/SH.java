@@ -41,6 +41,9 @@ public class SH {
     ///** 
     // these are the commannds that each device can receive and react,
     // so every outputPowerCommand must be unique in every device contected in local network.
+
+
+// on addCommandsAndPorts function RECOMENDER LOWER CASE TEXT 
     private void initializePowerCommands(){
 
         for(int i=0 ;i<NumberOfBindingCommands;i++){
@@ -113,8 +116,8 @@ public class SH {
 
     ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=15;// 0 - 20
-    private final int raspberryInputs=15;// 0 - 20
+    private final int raspberryOutputs=15;// 0 - 14
+    private final int raspberryInputs=15;// 15 - 29
     private ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
@@ -165,6 +168,7 @@ public class SH {
     }
 
     // add commands text for reaction and the ports that want to react 
+
     private void addCommandsAndPorts(int number,String [] reactOnCommands,Integer [] ports){
         for(int i=0;i<reactOnCommands.length;i++){
             outputPowerCommands[number].add(reactOnCommands[i]);

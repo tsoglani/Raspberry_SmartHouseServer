@@ -36,6 +36,8 @@ public class SH {
     ///** 
     // these are the commannds that each device can receive and react,
     // so every outputPowerCommand must be unique in every device contected in local network.
+
+// on addCommandsAndPorts function RECOMENDER LOWER CASE TEXT 
     private void initializePowerCommands(){
 
         for(int i=0 ;i<NumberOfBindingCommands;i++){
@@ -108,8 +110,8 @@ public class SH {
 
     ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=15;// 0 - 20
-    private final int raspberryInputs=15;// 0 - 20
+    private final int raspberryOutputs=23;// 0 - 22
+    private final int raspberryInputs=23;// 23 - 45
     private ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
@@ -205,25 +207,25 @@ public class SH {
                 pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i);
                 break;
                 case 1:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i);
                 break;
                 case 2:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
                 break;
                 case 3:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
                 break;
                 case 4:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i);
                 break;
                 case 5:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i);
                 break;
                 case 6:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_12, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_6, "PinLED" + i);
                 break;
                 case 7:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_13, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_7, "PinLED" + i);
                 break;
                                      case 8:
                                          pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
@@ -246,24 +248,31 @@ public class SH {
                                      case 14:
                                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_14, "PinLED" + i);
                                         break;
-                                    // case 15:
-                                      //   pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_15, "PinLED" + i);
-                                        // break;
-                                  //   case 16:
-                                  //       pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "PinLED" + i);
-                                 //        break;
-                                 //    case 17:
-                                 //        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, "PinLED" + i);
-                                //         break;
-                                //     case 18:
-                                  //       pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "PinLED" + i);
-                                 //        break;
-                                 //    case 19:
-                                //         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "PinLED" + i);
-                                //         break;
-                                //     case 20:
-                                //         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i);
-                                //        break;
+                                     case 15:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_15, "PinLED" + i);
+                                         break;
+                                    case 16:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "PinLED" + i);
+                                         break;
+                                     case 17:
+                                       pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, "PinLED" + i);
+                                         break;
+                                   case 18:
+                                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "PinLED" + i);
+                                         break;
+                                     case 19:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "PinLED" + i);
+                                        break;
+                                    case 20:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i);
+                                      break;
+ case 21:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, "PinLED" + i);
+                                      break;
+ case 22:
+                                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_22, "PinLED" + i);
+                                      break;
+
 
             }
             pins[i]=pin;
@@ -281,87 +290,96 @@ public class SH {
             GpioPinDigitalInput myButton = null;
             switch (i) {
                 case 0:
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_15, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_23, "MyButton" + i);
                 break;
                 case 1:// commands for input no 1
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_16, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_24, "MyButton" + i);
 
                 break;
                 case 2://commands for input no 2
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_17, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_25, "MyButton" + i);
 
                 break;
                 case 3:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_18, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_26, "MyButton" + i);
 
                 break;
                 case 4:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27, "MyButton" + i);
 
                 break;
                 case 5:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_20, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_28, "MyButton" + i);
 
                 break;
                 case 6:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_21, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_29, "MyButton" + i);
 
                 break;
                 case 7:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_22, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_30, "MyButton" + i);
 
                 break;
                                  case 8:// commands for input no 3
-                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_23, "MyButton" + i);
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_31, "MyButton" + i);
                 
                                     break;
                                  case 9:// commands for input no 3
-                                   myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_24, "MyButton" + i);
+                                   myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_32, "MyButton" + i);
               
                                  break;
                                case 10:// commands for input no 3
-                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_25, "MyButton" + i);
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_33, "MyButton" + i);
               
                                    break;
                               case 11:// commands for input no 3
-                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_26, "MyButton" + i);
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_34, "MyButton" + i);
                
                                    break;
                             case 12:// commands for input no 3
-                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_27, "MyButton" + i);
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_35, "MyButton" + i);
                             break;
                                 case 13:// commands for input no 3
-                                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_28, "MyButton" + i);
+                                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_36, "MyButton" + i);
                  
                                      break;
                                  case 14:// commands for input no 3
-                                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_29, "MyButton" + i);
+                                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_37, "MyButton" + i);
                  
                                      break;
-                //                 case 15:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_15, "MyButton" + i);
-                // 
-                //                     break;
-                //                 case 16:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_16, "MyButton" + i);
-                // 
-                //                     break;
-                //                 case 17:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_17, "MyButton" + i);
-                // 
-                //                     break;
-                //                 case 18:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_18, "MyButton" + i);
-                // 
-                //                     break;
-                //                 case 19:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19, "MyButton" + i);
-                // 
-                //                     break;
-                //                 case 20:// commands for input no 3
-                //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_20, "MyButton" + i);
-                // 
-                //                     break;
+                                case 15:// commands for input no 3
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_38, "MyButton" + i);
+               
+                                  break;
+                               case 16:// commands for input no 3
+                                  myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_39, "MyButton" + i);
+              
+                                     break;
+                               case 17:// commands for input no 3
+                                    myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_40, "MyButton" + i);
+                 
+                                 break;
+                                case 18:// commands for input no 3
+                                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_41, "MyButton" + i);
+               
+                                    break;
+                               case 19:// commands for input no 3
+                                   myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_42, "MyButton" + i);
+               
+                                     break;
+                               case 20:// commands for input no 3
+                                  myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_43, "MyButton" + i);
+                 
+                                     break;
+  case 21:// commands for input no 3
+                                  myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_44, "MyButton" + i);
+                 
+                                     break;
+  case 22:// commands for input no 3
+                                  myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_45, "MyButton" + i);
+                 
+                                     break;
+  
             }
             myButton.addListener(new GpioUsageExampleListener(i));
 
