@@ -85,7 +85,7 @@ public class SH {
      break;
       case 4:
                     addCommandsAndPorts(i // command no 4
-                    ,new String[]{"computer" },
+                    ,new String[]{"Computer" },
                    new Integer[]{14,15});// on command 4 these outputs will open or close at once when the previous commands received
                    break;
                    case 5:
@@ -159,7 +159,7 @@ private void initArrays(){
     // add commands text for reaction and the ports that want to react 
      private void addCommandsAndPorts(int number,String [] reactOnCommands,Integer [] ports){
         for(int i=0;i<reactOnCommands.length;i++){
-        outputPowerCommands[number].add(reactOnCommands[i]);
+        outputPowerCommands[number].add(reactOnCommands[i].toLowerCase());
     }
    for(int i=0;i<ports.length;i++){
          activatePortOnCommand[number].add(ports[i]);

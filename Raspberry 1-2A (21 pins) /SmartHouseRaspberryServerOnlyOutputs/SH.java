@@ -159,7 +159,7 @@ private void initArrays(){
     // add commands text for reaction and the ports that want to react 
      private void addCommandsAndPorts(int number,String [] reactOnCommands,Integer [] ports){
         for(int i=0;i<reactOnCommands.length;i++){
-        outputPowerCommands[number].add(reactOnCommands[i]);
+        outputPowerCommands[number].add(reactOnCommands[i].toLowerCase());
     }
    for(int i=0;i<ports.length;i++){
          activatePortOnCommand[number].add(ports[i]);
