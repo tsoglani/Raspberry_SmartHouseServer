@@ -1179,9 +1179,11 @@ fr.updateManual(); }
 
                         if(pins[p].getPin().getAddress()== activatePortOnCommand[j].get(h)){
 
-                            System.out.println(DeviceID+"::"+ h+" switch::"+j+" "+mode);
-                         System.out.println(" switch2222 "+outputCommands[p].get(0));
-                            sendToAll("switch "+DeviceID+ " output "+p+" "+mode);
+                            
+                            int sendid=getRealOutLed(p);
+
+                         System.out.println("switch "+DeviceID+ " output "+sendid+" "+mode);
+                            sendToAll("switch "+DeviceID+ " output "+sendid+" "+mode);
                         }
                     }
 
