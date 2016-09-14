@@ -1,21 +1,31 @@
 # Raspberry_SmartHouseServer
 
 
+
+
 This file contains two project:
 -SmartHouseRaspberryServer: 15 outputs 15 inputs ( if you want to use it with switches for example light switches ).
  -SmartHouseRaspberryServerOnlyOutputs: only outputs and no input ( 30 out 0 in).
 
 In both project, you can send commands from your computer, android, wearable-watch device to your raspberry device (if you refactor the SH.java file this would be able to work in any device not only raspberry) you can connect as many raspberry devices as you want but all of them must be conected to the same local network ( the device you will use to send the command must also be on same local network ).
 
+----- Raspberry command line commands
+(can also use -sudo -i to excecute on root)
+-sudo apt-get update  ////--update
+-sudo apt-get upgrade       ////--upgrade
+-sudo apt-get install raspberrypi-ui-mods  // touch screen plugins   
+-sudo apt-get install raspberrypi-net-mods  // touch screen plugins                
+-curl -s get.pi4j.com | sudo bash    ////--update
+-sudo apt-get install pi4j or pi4j   ////--update                    /// update the raspberry libs
+
 
 imports libs:
 
--sudo apt-get update                  ////--update
--curl -s get.pi4j.com | sudo bash    ////--update
--sudo apt-get install pi4j or pi4j   ////--update                    /// update the raspberry libs
+
 - imports all libraries from  /opt/pi4j/lib                   /// tools->preferences->Libraries->Add
 - imports derby.jar and derbyclient.jar from poject's folder /// tools->preferences->Libraries->Add
 - restart bluej
+
 
 inside the code you might have to modify:
 

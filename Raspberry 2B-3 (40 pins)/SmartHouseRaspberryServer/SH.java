@@ -114,11 +114,11 @@ public class SH {
 
     //// end of user editable part
 
-    ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
+  protected   ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=15;// 0 - 14
-    private final int raspberryInputs=15;// 15 - 29
-    private ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
+    private static final int raspberryOutputs=15;// 0 - 14
+    private static final int raspberryInputs=15;// 15 - 29
+    protected   ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
     private ArrayList<String> ON, OFF;// = "on", OFF = "off";// word you have to use at the end of the command to activate or deactivate
@@ -159,7 +159,7 @@ public class SH {
     }
 
     private void initArrays(){
-
+//outputPowerCommands = new ArrayList[NumberOfBindingCommands];
         for(int i=0;i<NumberOfBindingCommands;i++){
             outputPowerCommands[i] = new ArrayList<String>();
 
@@ -196,7 +196,6 @@ public class SH {
     // Example send command "kitchen light" and "on" or "off" to activate or deactivate the device in output 0. 
     //You can modify your commands.
     private void initializeOutputCommands() {
-
         for (int i = 0; i < outputCommands.length; i++) {
             outputCommands[i] = new ArrayList<String>();
             outputCommands[i].add(DeviceID+" output " +( i));
@@ -651,7 +650,7 @@ public class SH {
 
     }
 
-    private String getAllOutput() {
+    protected String getAllOutput() {
 
         String output = new String();
         try {
@@ -688,7 +687,7 @@ public class SH {
         return output;
     }
 
-    private String getAllCommandOutput() {
+    protected String getAllCommandOutput() {
         String output = new String();
         try {
             //GpioController  gpio = GpioFactory.getInstance();
@@ -742,32 +741,32 @@ public class SH {
     }
 
     private int getRealOutLed(int port){
-        int pinID=-1;
-        switch(port){
-            case 0:
-            pinID=0;
-            break;
-            case 2:
-            pinID=1;
-            break;
-            case 3:
-            pinID=2;
-            break;
-            case 7:
-            pinID=3;
-            break;
-            case 8:
-            pinID=4;
-            break;
-            case 9:
-            pinID=5;
-            break; case 12:
-            pinID=6;
-            break;
-            case 13:
-            pinID=7;
-            break;
-        }
+        int pinID=port;
+//         switch(port){
+//             case 0:
+//             pinID=0;
+//             break;
+//             case 2:
+//             pinID=1;
+//             break;
+//             case 3:
+//             pinID=2;
+//             break;
+//             case 7:
+//             pinID=3;
+//             break;
+//             case 8:
+//             pinID=4;
+//             break;
+//             case 9:
+//             pinID=5;
+//             break; case 12:
+//             pinID=6;
+//             break;
+//             case 13:
+//             pinID=7;
+//             break;
+//         }
 
         return pinID;
     }
@@ -782,7 +781,7 @@ public class SH {
 
     protected void processCommandString(String input){
         String isDoing = "off";
-
+                            System.out.println(input);
         for (int i = 0; i < outputPowerCommands.length; i++) {
 
             for (int j = 0; j < outputPowerCommands[i].size(); j++) {
@@ -814,7 +813,11 @@ public class SH {
                         for(int k=0;k<activatePortOnCommand[i].size();k++){
                             ToggleLedNo(activatePortOnCommand[i].get(k),OFF.get(0));
                         }
-                    }
+
+      
+                  
+    }
+      
                 }
 
             }}
@@ -846,10 +849,20 @@ public class SH {
         } else if (state.equalsIgnoreCase( OFF.get(0))) {
             pin.low();
         }
-        //  gpio.shutdown();
+        
+        
+        
+//           String usingString=outputPowerCommands[i].get(j)+""+isDoing;
+//      
+//         if(fr!=null)
+//         fr.changeState(usingString);
+
+if(fr.isSwitchModeSelected){
+fr.updateManual(); }
+
     }
 
-    private boolean processLedString(String input) {
+    protected boolean processLedString(String input) {
         // get a handle to the GPIO controller
         // GpioController  gpio = GpioFactory.getInstance();
         boolean found=false;
@@ -887,7 +900,8 @@ public class SH {
                     } else if (OFF.contains(isDoing)) {
                         pin.low();
                     }
-
+if(fr.isSwitchModeSelected){
+fr.updateManual(); }
                     break;
 
                 }
@@ -916,9 +930,10 @@ public class SH {
         //   gpio.shutdown();
         return found;
     }
-
+ private static Fr fr;
     public static void main(String args[]) throws Exception {
         SH shs = new SH();
+         fr=new Fr(shs);
         shs.start();
     }
 
@@ -973,6 +988,7 @@ public class SH {
     }
 
     public void sendToAll(final String message){
+        
         new Thread(){public void run(){
                 try {
 
@@ -1152,8 +1168,9 @@ public class SH {
             mode="off"; 
         }
         //if(outputPowerCommands.contains(shCm)){
+        
         for(int j=0;j<outputPowerCommands.length;j++){
-
+    System.out.println("shCm="+shCm+"  vs"+outputPowerCommands[j].get(0));
             if(outputPowerCommands[j].get(0).equals(shCm)){
                 for(int h=0;h<activatePortOnCommand[j].size();h++){
                     //
@@ -1162,7 +1179,8 @@ public class SH {
 
                         if(pins[p].getPin().getAddress()== activatePortOnCommand[j].get(h)){
 
-                            System.out.println(DeviceID+ " switch "+p+" "+mode);
+                            System.out.println(DeviceID+"::"+ h+" switch::"+j+" "+mode);
+                         System.out.println(" switch2222 "+outputCommands[p].get(0));
                             sendToAll("switch "+DeviceID+ " output "+p+" "+mode);
                         }
                     }
@@ -1194,6 +1212,7 @@ public class SH {
                                 }
                                 if(isActive){
                                     sendToAll("switch "+outputPowerCommands[k].get(0)+" "+mode);
+                                    
                                 }
                             }
                             // System.out.println("update 2 switch "+outputPowerCommands[k].get(0)+" "+mode);
@@ -1292,6 +1311,9 @@ if(isHight)
         // 
         //             }
         //         }}
+        
+        if(fr.isSwitchModeSelected){
+fr.updateManual(); }
     }
 
     private GpioPinDigitalOutput getPinFromOutput(int output){
