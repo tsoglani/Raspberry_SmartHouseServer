@@ -81,13 +81,14 @@ switcButtons=new <JButton> ArrayList();
 toggle.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
         
-        if(toggle.isSelected()){
-        toggle.setText("Output Mode");
-        manualSelected();
-        }else{
-
-        toggle.setText("Commands Mode");
+        if(!toggle.isSelected()){
+    
+            toggle.setText("Commands Mode");
                         manualSelected();
+        }else{
+    toggle.setText("Output Mode");
+        manualSelected();
+    
         }
     }
 });
@@ -99,7 +100,7 @@ home.setSize((int)(height/20), (int)(height/20));
   
 ArrayList<String>[] usingList;
         String neededOutputs;
-        if(toggle.getText().equals("Commands Mode")){
+        if(toggle.getText().equals("Output Mode")){
        usingList=sh.outputCommands;
        neededOutputs=sh.getAllOutput();
         }else{
@@ -126,7 +127,7 @@ ArrayList<String>[] usingList;
 String command =button.getText();
                    new Thread(){public void run(){
                     try {
-                        if(toggle.getText().equals("Commands Mode")){
+                        if(toggle.getText().equals("Output Mode")){
 sh.processLedString(command + " " + state);
    sh.sendToAll("switch "+command + " " + state);
                         System.out.println("pressed:"+command + " " + state);
@@ -174,7 +175,7 @@ revalidate();
 protected void updateManual(){
 ArrayList<String>[] usingList;
         String neededOutputs;
-       if(toggle.getText().equals("Commands Mode")){
+       if(toggle.getText().equals("Output Mode")){
        usingList=sh.outputCommands;
        neededOutputs=sh.getAllOutput();
         }else{
