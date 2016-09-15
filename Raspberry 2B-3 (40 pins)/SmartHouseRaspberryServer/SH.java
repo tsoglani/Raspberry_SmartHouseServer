@@ -1181,9 +1181,10 @@ fr.updateManual(); }
 
                             
                             int sendid=getRealOutLed(p);
-
-                         System.out.println("switch "+DeviceID+ " output "+sendid+" "+mode);
-                            sendToAll("switch "+DeviceID+ " output "+sendid+" "+mode);
+System.out.println("switch "+outputCommands[p].get(0)+" "+mode );
+                     //    System.out.println("switch "+DeviceID+ " output "+sendid+" "+mode);
+                           // sendToAll("switch "+DeviceID+ " output "+sendid+" "+mode);
+                              sendToAll("switch "+outputCommands[p].get(0)+" "+mode );
                         }
                     }
 
