@@ -422,7 +422,7 @@ public class SH {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
             String sentence = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
-            System.out.println(sentence);
+          //  System.out.println(sentence);
             //             if(!addresses.contains(receivePacket.getAddress()))
             //                 addresses.add(receivePacket.getAddress());
             //             if(!allPorts.contains(receivePacket.getPort()))
@@ -431,7 +431,9 @@ public class SH {
             if(sentence.startsWith("userUniqueID:")){
                 uniqueUserID=sentence.split(DB.USER_ID_SPLIT)[0];
                 sentence=sentence.substring((uniqueUserID+DB.USER_ID_SPLIT).length());
-            }else{System.out.println("No Unique user id");}
+            }else{
+              //  System.out.println("No Unique user id");
+            }
             if (sentence.startsWith("globalReturning")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 String sentence2=sentence.substring("globalReturning".length());
                 if(sentence2.replace(" ","").equalsIgnoreCase(deviceName.replace(" ",""))){
@@ -469,7 +471,15 @@ public class SH {
             || sentence.equalsIgnoreCase("chooseSheduleFunction")|| sentence.equalsIgnoreCase("chooseAutomationFunction")
             || sentence.equalsIgnoreCase("chooseTimerFunction")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 sendData(sentence, receivePacket.getAddress(), receivePacket.getPort());
-
+                final String sent=sentence;
+                new Thread(){
+                public void run(){
+                    try{
+                        
+                                    sendData(sent, receivePacket.getAddress(), receivePacket.getPort());
+                }catch (Exception e){}}
+                }.start();
+            System.out.println(sentence);
             } else if (sentence.startsWith("globalReturning")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 sentence=sentence.substring("globalReturning".length());
                 System.out.println(sentence+" "+deviceName);
