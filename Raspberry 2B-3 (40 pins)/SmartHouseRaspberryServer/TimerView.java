@@ -121,18 +121,21 @@ public class TimerView extends JPanel
         String title ;
         ArrayList <TimerCountdown> timers=new ArrayList  <TimerCountdown>();
         private JPanel centerPanel= new JPanel();
+          JScrollPane scrollSpecific;
         private  ArrayList<CostumeButton> buttons = new  ArrayList<CostumeButton>();
             ArrayList <CostumeButton> removingButtons= new ArrayList<CostumeButton>();
                 ArrayList <TimerCountdown> removingTimers= new ArrayList<TimerCountdown>();
         public MyJPanel(String title){
             this.title=title;
+            centerPanel.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
+              scrollSpecific = new JScrollPane(centerPanel);
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createLineBorder(Color.black));
             JLabel titleLabel= new JLabel(title);
             JPanel titlePanel= new JPanel();
             titlePanel.add(titleLabel);
             add(titlePanel,BorderLayout.PAGE_END);
-            add(centerPanel,BorderLayout.CENTER);
+            add(scrollSpecific,BorderLayout.CENTER);
 
         }
     
@@ -239,6 +242,7 @@ public class TimerView extends JPanel
         }
 
         private void addCenter(Component c){
+
             centerPanel.add(c);
             centerPanel.repaint();
             centerPanel.revalidate();
@@ -253,6 +257,7 @@ public class TimerView extends JPanel
 
             this.timer=timer;
                         this.id=timer.id;
+                                    setAlignmentX(Component.CENTER_ALIGNMENT);
         }
     }
 
