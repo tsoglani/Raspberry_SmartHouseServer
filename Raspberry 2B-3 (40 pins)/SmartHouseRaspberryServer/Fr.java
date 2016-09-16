@@ -265,7 +265,7 @@ public class Fr extends JFrame
 
     }
 
-    private Image getScaledImage(Image srcImg, int w, int h){
+    protected Image getScaledImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
 
