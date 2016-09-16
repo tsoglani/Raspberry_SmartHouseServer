@@ -22,42 +22,52 @@ public class TimerView extends JPanel
         this.fr=fr;
         fr.isTimerModeSelected=true;
         ImageIcon addTime=new ImageIcon("add_timer.png");
-                addTime=new ImageIcon(fr.getScaledImage(addTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
+        addTime=new ImageIcon(fr.getScaledImage(addTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         addTimeButton = new JButton(addTime);
-        
-         ImageIcon deleteIcon=new ImageIcon("trash.png");
-                deleteIcon=new ImageIcon(fr.getScaledImage(deleteIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
+
+        ImageIcon deleteIcon=new ImageIcon("trash.png");
+        deleteIcon=new ImageIcon(fr.getScaledImage(deleteIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         deleteButton = new JButton(deleteIcon);
-            bottomPanel.setLayout(new GridLayout(1,3));
-        
-          ImageIcon cancelIcon=new ImageIcon("cancel3.png");
-                cancelIcon=new ImageIcon(fr.getScaledImage(cancelIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
+        bottomPanel.setLayout(new GridLayout(1,3));
+
+        ImageIcon cancelIcon=new ImageIcon("cancel3.png");
+        cancelIcon=new ImageIcon(fr.getScaledImage(cancelIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         cancelButton = new JButton(cancelIcon);
-        
+
+        addTimeButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    new NewTimerView(fr);
+                    selectedButtonText=null;
+                    selectedTimerForDelete=null;  
+                    fr.isTimerModeSelected=false;
+
+                }
+            });
+
         cancelButton.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent e){
-            chooseAddTime();
-        }
-        });
-        
-         deleteButton.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent e){
-                ArrayList<TimerCountdown> timers =TimerCountdown.timers;
-           if(selectedTimerForDelete!=null){
-            if(timers.contains(selectedTimerForDelete)){
-            timers.remove(selectedTimerForDelete);
-          fr.sh.sendToAll("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers()
-                     );   
-            
-            }
-            }
-      
-            chooseAddTime();
-        }
-        });
+                public void actionPerformed(ActionEvent e){
+                    chooseAddTime();
+                }
+            });
+
+        deleteButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    ArrayList<TimerCountdown> timers =TimerCountdown.timers;
+                    if(selectedTimerForDelete!=null){
+                        if(timers.contains(selectedTimerForDelete)){
+                            timers.remove(selectedTimerForDelete);
+                            fr.sh.sendToAll("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers()
+                            );   
+
+                        }
+                    }
+
+                    chooseAddTime();
+                }
+            });
         showList();
         chooseAddTime();
-      
+
         thread=  new Thread(){public void run(){
                 while(fr.isTimerModeSelected){
                     try{ 
@@ -81,7 +91,7 @@ public class TimerView extends JPanel
         switcButtons=new <MyJPanel> ArrayList();
 
         header.setLayout(new BorderLayout());
-        header.add(fr.home,BorderLayout.PAGE_START);
+        header.add(fr.home,BorderLayout.LINE_END);
         add(header,BorderLayout.PAGE_START);
         ArrayList<String>[] usingList;
         String neededOutputs;
@@ -100,37 +110,37 @@ public class TimerView extends JPanel
             add(center);
         }
         updateTimers();
-      
+
         fr.add(this);
         add(bottomPanel,BorderLayout.PAGE_END);
-          repaint();
+        repaint();
         revalidate();
         fr.repaint();
         fr.revalidate();
     }
-    
+
     private void chooseAddTime(){
-    bottomPanel.removeAll();
-              bottomPanel.add(new JLabel());
+        bottomPanel.removeAll();
+        bottomPanel.add(new JLabel());
         bottomPanel.add(addTimeButton);
         bottomPanel.add(new JLabel());
-selectedButtonText=null;
-selectedTimerForDelete=null;   
- bottomPanel.repaint();
-    bottomPanel.revalidate();
+        selectedButtonText=null;
+        selectedTimerForDelete=null;   
+        bottomPanel.repaint();
+        bottomPanel.revalidate();
     }
-    
+
     private void chooseForDelete(String text){
-     bottomPanel.removeAll();
-     selectedButtonText=new JLabel(text);
-     selectedButtonText.setHorizontalAlignment(SwingConstants.CENTER);
-             bottomPanel.add(cancelButton);
-              bottomPanel.add(selectedButtonText);
+        bottomPanel.removeAll();
+        selectedButtonText=new JLabel(text);
+        selectedButtonText.setHorizontalAlignment(SwingConstants.CENTER);
+        bottomPanel.add(cancelButton);
+        bottomPanel.add(selectedButtonText);
         bottomPanel.add(deleteButton);
 
-    bottomPanel.repaint();
-    bottomPanel.revalidate();
-    
+        bottomPanel.repaint();
+        bottomPanel.revalidate();
+
     }
 
     static ArrayList<TimerCountdown> timerVisible= TimerCountdown.timers;
@@ -186,24 +196,24 @@ selectedTimerForDelete=null;
         String title ;
         ArrayList <TimerCountdown> timers=new ArrayList  <TimerCountdown>();
         private JPanel centerPanel= new JPanel();
-          JScrollPane scrollSpecific;
+        JScrollPane scrollSpecific;
         private  ArrayList<CostumeButton> buttons = new  ArrayList<CostumeButton>();
-            ArrayList <CostumeButton> removingButtons= new ArrayList<CostumeButton>();
-                ArrayList <TimerCountdown> removingTimers= new ArrayList<TimerCountdown>();
+        ArrayList <CostumeButton> removingButtons= new ArrayList<CostumeButton>();
+        ArrayList <TimerCountdown> removingTimers= new ArrayList<TimerCountdown>();
         public MyJPanel(String title){
             this.title=title;
             centerPanel.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
-              scrollSpecific = new JScrollPane(centerPanel);
+            scrollSpecific = new JScrollPane(centerPanel);
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createLineBorder(Color.black));
             JLabel titleLabel= new JLabel(title);
             JPanel titlePanel= new JPanel();
             titlePanel.add(titleLabel);
-            add(titlePanel,BorderLayout.PAGE_END);
+            add(titlePanel,BorderLayout.PAGE_START);
             add(scrollSpecific,BorderLayout.CENTER);
 
         }
-    
+
         public void update(){
             removingButtons.removeAll(removingButtons);
             removingTimers.removeAll(removingTimers);
@@ -213,25 +223,25 @@ selectedTimerForDelete=null;
                 TimerCountdown timer=timers.get(i);
                 boolean contains=false;
 
-                 if(!TimerCountdown.timers.contains(timer)){
-                        // remove button
-                        for(int j=0;j<buttons.size();j++){
-                            CostumeButton cb=buttons.get(j);
-                            if(cb.id==timer.id){
+                if(!TimerCountdown.timers.contains(timer)){
+                    // remove button
+                    for(int j=0;j<buttons.size();j++){
+                        CostumeButton cb=buttons.get(j);
+                        if(cb.id==timer.id){
 
-                                removingButtons.add(cb);
-                                removingTimers.add(timer);
-                                System.out.println("remove timer");
-if(selectedTimerForDelete!=null&&selectedTimerForDelete.id==timer.id&&selectedButtonText!=null){
-chooseAddTime();
+                            removingButtons.add(cb);
+                            removingTimers.add(timer);
+                            System.out.println("remove timer");
+                            if(selectedTimerForDelete!=null&&selectedTimerForDelete.id==timer.id&&selectedButtonText!=null){
+                                chooseAddTime();
 
-}                                
+                            }                                
 
-                            }
                         }
-                       
-                        continue;
-                    } 
+                    }
+
+                    continue;
+                } 
                 for(int j=0;j<buttons.size();j++){
                     if(buttons.get(j).id==timer.id){
                         contains=true;
@@ -247,13 +257,12 @@ chooseAddTime();
 
                             cb.setText(getTextToButton(timer));
 
-if(selectedTimerForDelete!=null&&selectedTimerForDelete.id==timer.id&&selectedButtonText!=null){
-selectedButtonText.setText("Delete: "+title+" "+getTextToButton(timer));
-}
+                            if(selectedTimerForDelete!=null&&selectedTimerForDelete.id==timer.id&&selectedButtonText!=null){
+                                selectedButtonText.setText("Delete: "+title+" "+getTextToButton(timer));
+                            }
                         }
                     }
 
-                   
                 }else{
                     // create button and add it 
                     CostumeButton button = new CostumeButton(timer);
@@ -278,7 +287,7 @@ selectedButtonText.setText("Delete: "+title+" "+getTextToButton(timer));
                 }
 
             }
-            
+
             if(!removingTimers.isEmpty()){
 
                 for(int i=0;i<removingTimers.size();i++){
@@ -320,31 +329,27 @@ selectedButtonText.setText("Delete: "+title+" "+getTextToButton(timer));
             centerPanel.revalidate();
 
         }
- 
 
-    private class CostumeButton extends JButton{
-        int id;
-        TimerCountdown timer;
-        public CostumeButton(TimerCountdown timer){
+        private class CostumeButton extends JButton{
+            int id;
+            TimerCountdown timer;
+            public CostumeButton(TimerCountdown timer){
 
-            this.timer=timer;
-                        this.id=timer.id;
-                                    setAlignmentX(Component.CENTER_ALIGNMENT);
-                                    addActionListener(new ActionListener(){
-                                    
-                                    @Override
-                                    public void actionPerformed(ActionEvent e){
-                                    
-                                 chooseForDelete("Delete: "+title+" "+getTextToButton(timer));
-                                 selectedTimerForDelete=timer;
-                                    }
-                                });
+                this.timer=timer;
+                this.id=timer.id;
+                setAlignmentX(Component.CENTER_ALIGNMENT);
+                addActionListener(new ActionListener(){
+
+                        @Override
+                        public void actionPerformed(ActionEvent e){
+
+                            chooseForDelete("Delete: "+title+" "+getTextToButton(timer));
+                            selectedTimerForDelete=timer;
+                        }
+                    });
+            }
+
         }
-        
-       
-
     }
-    }
-   
 
 }
