@@ -211,6 +211,7 @@ public class NewTimerView extends JPanel{
                 }
                 TimerCountdown timerCountdown=  new TimerCountdown(fr.sh,mp.title+mode,Integer.toString(mp.getRemainingTimeToSeconds()),Long.toString(getTimeStamps()));
                 timerCountdown.start();
+
                 new Thread(){
                     public void run(){
                         try{
@@ -220,8 +221,8 @@ public class NewTimerView extends JPanel{
                     }
 
                 }.start();
-
-                System.out.println(mp.title+mode+"  "+mp.hours+":"+mp.min+":"+mp.sec );
+              fr.sh.sendToAll("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers());
+                System.out.println("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers() );
             }
         }
     }
