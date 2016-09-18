@@ -1410,7 +1410,7 @@ fr.updateManual(); }
     }
     private class ResetThread extends Thread{
         final int maxTime=20*60*1000;
-        int remaining=maxTime,sleepingtime=30*1000;
+        int remaining=maxTime,sleepingtime=0*1000;
         //   ArrayList <Object[]> list;
         boolean isRunning=true;
         Object[] obj;
