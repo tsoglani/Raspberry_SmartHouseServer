@@ -22,7 +22,7 @@ import java.util.Date;
 public class SH {
 
     private DatagramSocket serverSocket;
-    private DB db;
+    protected DB db;
 
     //// user editable part
     // Pay attention on **
@@ -1086,13 +1086,23 @@ fr.updateManual(); }
     private boolean isSearchingForShedules=true;
     private int secondsSheduleDelay=10;
     private String prevTime;
+    
     private class SheduleThread extends Thread{
         public void run(){
+            new Thread(){
+            public void run(){
+            
+            }
+            }.start();
             while(isSearchingForShedules){
                 try{
 
                     Thread.sleep(secondsSheduleDelay*1000);
                     Calendar calendar=Calendar.getInstance();
+                    
+                      if(fr.shv!=null)
+              
+
                     if(prevTime==null||!prevTime.equals(getTime(calendar))){
                         prevTime=getTime(calendar);
                     }
@@ -1156,8 +1166,7 @@ fr.updateManual(); }
                             }
                         }
                     }
-                    if(fr.shv!=null)
-                    fr.shv.update(db.getShedules());
+                  
                 }catch(Exception e){
                     System.out.println(e.getMessage());}}
         }}

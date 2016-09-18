@@ -7,9 +7,10 @@ public class SheduleView extends JPanel
 { private JButton back;
     private Fr fr;
     private  Color []colors = {Color.gray,Color.green,Color.red};
- ArrayList   <MyJPanel> myPanels;
+    ArrayList   <MyJPanel> myPanels;
     public SheduleView(Fr fr)
     {
+
         this.fr=fr;
         setLayout(new BorderLayout());
         //    ImageIcon backTime=new ImageIcon("back.png");
@@ -19,39 +20,48 @@ public class SheduleView extends JPanel
         createGUI();
         fr.isSheduleModeSelected=true;
         fr.shv=this;
+
+        new Thread(){
+            public void run(){
+                while(fr.isSheduleModeSelected)   {
+                    try{
+                       update(fr.sh.db.getShedules());
+                        Thread.sleep(2000);
+                    }catch(Exception e){}}
+            }}.start();
     }
 
     protected void update(ArrayList<Shedule> sheduleList){
-    if(sheduleList!=null)
-    for(int i=0;i<sheduleList.size();i++){
-    Shedule shedule=sheduleList.get(i);
-    boolean containsInMyPanels=false;
-    boolean isGoingToOpen;
-    String timerFullCommand=shedule.getCommandText();
-        String timerCommand=null;
-            if(timerFullCommand.endsWith("on")){
-                timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"on".length());
-                isGoingToOpen=true;
+        if(sheduleList!=null)
+            for(int i=0;i<sheduleList.size();i++){
+                Shedule shedule=sheduleList.get(i);
+                boolean containsInMyPanels=false;
+                boolean isGoingToOpen;
+                String timerFullCommand=shedule.getCommandText();
+                String timerCommand=null;
+                if(timerFullCommand.endsWith("on")){
+                    timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"on".length());
+                    isGoingToOpen=true;
 
-            }else if(timerFullCommand.endsWith("off")){
-                timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"off".length());
-                isGoingToOpen=false;
+                }else if(timerFullCommand.endsWith("off")){
+                    timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"off".length());
+                    isGoingToOpen=false;
+                }
+                if(myPanels!=null)
+                    for(int j=0;j<myPanels.size();j++){
+                        MyJPanel mp=myPanels.get(j);
+
+                        if(mp.title.equals(timerCommand)){
+                            System.out.println(timerCommand+":::"+mp.title);
+                            /////for 
+                            mp.update(shedule,sheduleList);
+
+                        }
+                    }
             }
-    if(myPanels!=null)
-     for(int j=0;i<myPanels.size();j++){
-    MyJPanel mp=myPanels.get(j);
-    if(mp.title.equals(timerCommand)){
-   
-        /////for 
-        mp.update(shedule);
-        
+
     }
-    }
-    }
-    
-    
-    }
-   
+
     private void createGUI(){
         fr.getContentPane().removeAll();
         fr.getContentPane().add(this);
@@ -115,12 +125,45 @@ public class SheduleView extends JPanel
             //## end of example
 
         }
+        ArrayList<SingleSheduleView> deletedSingleSheduleView = new ArrayList<SingleSheduleView>();
+        protected void update(Shedule shedule,ArrayList<Shedule> sheduleList){
+            boolean contains=false;
+            SingleSheduleView usingSsv=null;
+            deletedSingleSheduleView.removeAll(deletedSingleSheduleView);
+            for(int i=0;i<centerPanel.getComponentCount();i++){
+                SingleSheduleView ssv=(SingleSheduleView)centerPanel.getComponent(i);
+                boolean containsInSheduleList=false;
+                for(int j=0;i<sheduleList.size();j++){
+                    Shedule shedule2=sheduleList.get(j);
+                    if(shedule2.getId()==ssv.id){
+                        containsInSheduleList=true;
+                        break;
+                    }
 
-        protected void update(Shedule shedule){
-        
-        /// check for shedule in centerPanel id if not exist create
-        /// if exist update text
-        
+                }
+                if(!containsInSheduleList){
+                    deletedSingleSheduleView.add(ssv);
+                }
+                if(ssv.id==shedule.getId()){
+                    contains=true;
+                    usingSsv=ssv;
+                }
+            }
+            if(!contains){
+                centerPanel.add(new SingleSheduleView(shedule));
+            }else{
+                if(usingSsv!=null){
+                    usingSsv.updateAll(shedule);
+                }
+
+            }
+            for(int i=0;i<deletedSingleSheduleView.size();i++){
+                centerPanel.remove(deletedSingleSheduleView.get(i));
+            }
+
+            /// check for shedule in centerPanel id if not exist create
+            /// if exist update text
+
         }
         private class SingleSheduleView extends JPanel{
 
@@ -129,77 +172,102 @@ public class SheduleView extends JPanel
             protected JPanel firstRow,secondRow;
             private JButton delete,edit;
             private JCheckBox isWeekly,isActive; 
-            private JButton [] days= new JButton[7];
+            private JLabel [] days= new JLabel[7];
             private Shedule shedule;
-
+            private JPanel centerPanel,header;
+            protected JLabel timeLabel;
             public SingleSheduleView(Shedule shedule){
+                setLayout(new BorderLayout());
                 activeDays= shedule.getActiveDays();
                 weeklyString=  shedule.getIsWeekly();
                 activeDays=  shedule.getActiveDays();
                 activeString=  shedule.getIsActive();
                 commandString=  shedule.getCommandText();
+                centerPanel= new JPanel();
+                header= new JPanel();
                 id=shedule.getId();
                 time=shedule.getTime();
-                setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+
                 setBorder(BorderFactory.createLineBorder(Color.blue));
                 firstRow= new JPanel();
+                firstRow.setLayout (new GridLayout(1,7));
                 secondRow= new JPanel();
                 delete= new JButton("delete");
                 edit= new JButton("edit");
                 isWeekly= new JCheckBox("is Weekly");
                 isActive= new JCheckBox("is isActive");
-                add(firstRow);
-                add(secondRow);
+                centerPanel.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
+                centerPanel.add(firstRow);
+                centerPanel.add(secondRow);
+                timeLabel=new JLabel(time);
+                header.add(timeLabel);
+                add(centerPanel);
+                add(header,BorderLayout.PAGE_START);
                 for(int i=0;i<7;i++){
-                    JButton dayButton=null;
+                    JLabel dayButton=null;
                     switch(i){
                         case 0:
-                        dayButton= new JButton("Su");
+                        dayButton= new JLabel("Su");
                         break;
                         case 1:
-                        dayButton= new JButton("Mo");
+                        dayButton= new JLabel("Mo");
                         break;
                         case 2:
-                        dayButton= new JButton("Tu");
+                        dayButton= new JLabel("Tu");
                         break;
                         case 3:
-                        dayButton= new JButton("We");
+                        dayButton= new JLabel("We");
                         break;
                         case 4:
-                        dayButton= new JButton("Th");
+                        dayButton= new JLabel("Th");
                         break;
                         case 5:
-                        dayButton= new JButton("Fr");
+                        dayButton= new JLabel("Fr");
                         break;
                         case 6:
-                        dayButton= new JButton("Sa");
+                        dayButton= new JLabel("Sa");
                         break;    
                         default: 
-                        dayButton= new JButton("Uknown");
+                        dayButton= new JLabel("Uknown");
 
                     }
                     days[i]=dayButton;
+               
                     firstRow.add(dayButton);
+                    
                     dayButton.setBackground(colors[0]);
+                    
                 }
+                secondRow.add(delete);
 
-                secondRow.add(edit);
                 secondRow.add(isWeekly);
                 secondRow.add(isActive);
-                secondRow.add(delete);
+                secondRow.add(edit);
+
+                updateAll(shedule);
 
             }
 
-            private void updateAll(String activeDays,String weeklyString,String activeString){
+            private void updateAll(Shedule shedule){
+                updateAll(shedule.getActiveDays(), shedule.getIsWeekly(), shedule.getIsActive(), shedule.getTime());
+                repaint();
+                revalidate();
+                centerPanel.repaint();
+                centerPanel.revalidate();
+            }
+
+            private void updateAll(String activeDays,String weeklyString,String activeString,String time){
                 updateDaysEnable(activeDays);
                 updateWeekly(weeklyString);
                 updatActive(activeString);
+                updateTime(time);
             }
 
             private void updateAll(){
                 updateDaysEnable();
                 updateWeekly();
                 updatActive();
+                updateTime();
             }
 
             protected void updateDaysEnable(String activeDays){
@@ -211,9 +279,11 @@ public class SheduleView extends JPanel
 
                 Color usingColor=colors[2];
                 if(commandString.endsWith("on")){
-                    usingColor=colors[1];}
+                    usingColor=colors[1];
+                }
                 if(weeklyString.contains(Integer.toString( Calendar.SUNDAY))){
                     days[0].setBackground(usingColor);
+
                 }
                 if(weeklyString.contains(Integer.toString( Calendar.MONDAY))){
                     days[1].setBackground(usingColor);
@@ -233,8 +303,20 @@ public class SheduleView extends JPanel
                 if(weeklyString.contains(Integer.toString( Calendar.SATURDAY))){
                     days[6].setBackground(usingColor);
                 }
+//setBackground(usingColor);
+//centerPanel.setBackground(usingColor);
+//firstRow.setBackground(usingColor);
+//secondRow.setBackground(usingColor);
 
-            
+            }
+
+            protected void updateTime(String time){
+                this.time=time;
+                updateWeekly();
+            }
+
+            protected void updateTime(){
+                timeLabel.setText(time);
             }
 
             protected void updateWeekly(String weeklyString){
@@ -244,7 +326,6 @@ public class SheduleView extends JPanel
             }
 
             protected void updateWeekly(){
-
                 if(weeklyString.equalsIgnoreCase("true")|| weeklyString.equalsIgnoreCase("enable")){
                     isWeekly.setSelected(true);
                 }else  if(weeklyString.equalsIgnoreCase("false")|| weeklyString.equalsIgnoreCase("disable")){
