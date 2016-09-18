@@ -64,6 +64,12 @@ public class Fr extends JFrame
                     new TimerView(Fr.this);
                 }
             });
+            
+              auto.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    new SheduleView(Fr.this);
+                }
+            });
 
         this.setSize((int)width,(int)height);
         mainMenu();

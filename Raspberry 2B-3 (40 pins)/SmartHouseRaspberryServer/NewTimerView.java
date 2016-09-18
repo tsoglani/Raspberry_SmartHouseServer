@@ -60,7 +60,7 @@ public class NewTimerView extends JPanel{
         usingList=fr.sh.outputPowerCommands;
         neededOutputs=fr.sh.getAllCommandOutput();
         String [] outputs=neededOutputs.split("@@@");
-        center.setLayout(new GridLayout((int)Math.sqrt(usingList.length)+1,(int)Math.sqrt(usingList.length)+1));
+
         for(int i=0;i<usingList.length;i++){
             ArrayList <String> list=usingList[i];
             MyJPanel button = new MyJPanel(list.get(0));
@@ -74,7 +74,6 @@ public class NewTimerView extends JPanel{
         fr.repaint();
         fr.revalidate();
     }
-
 
     private class MyJPanel extends JPanel{
         int color_id=0;
