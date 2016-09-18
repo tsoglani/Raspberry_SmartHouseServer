@@ -221,7 +221,7 @@ public class NewTimerView extends JPanel{
                     }
 
                 }.start();
-              fr.sh.sendToAll("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers());
+
                 System.out.println("Timers:DeviceID:"+ fr.sh.DeviceID+ DB.COMMAND_SPLIT_STRING+TimerCountdown.getAllTimers() );
             }
         }
