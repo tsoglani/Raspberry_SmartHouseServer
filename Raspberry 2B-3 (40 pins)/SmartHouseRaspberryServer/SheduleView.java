@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.Calendar;
 public class SheduleView extends JPanel
 { private JButton back;
     private Fr fr;
     private  Color []colors = {Color.gray,Color.green,Color.red};
+ ArrayList   <MyJPanel> myPanels;
     public SheduleView(Fr fr)
     {
         this.fr=fr;
@@ -16,9 +17,41 @@ public class SheduleView extends JPanel
         //      back = new JButton(backTime);
         //             back = new JButton(backTime);
         createGUI();
+        fr.isSheduleModeSelected=true;
+        fr.shv=this;
     }
 
-    ArrayList   <MyJPanel> myPanels;
+    protected void update(ArrayList<Shedule> sheduleList){
+    if(sheduleList!=null)
+    for(int i=0;i<sheduleList.size();i++){
+    Shedule shedule=sheduleList.get(i);
+    boolean containsInMyPanels=false;
+    boolean isGoingToOpen;
+    String timerFullCommand=shedule.getCommandText();
+        String timerCommand=null;
+            if(timerFullCommand.endsWith("on")){
+                timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"on".length());
+                isGoingToOpen=true;
+
+            }else if(timerFullCommand.endsWith("off")){
+                timerCommand=timerFullCommand.substring(0,timerFullCommand.length()-1-"off".length());
+                isGoingToOpen=false;
+            }
+    if(myPanels!=null)
+     for(int j=0;i<myPanels.size();j++){
+    MyJPanel mp=myPanels.get(j);
+    if(mp.title.equals(timerCommand)){
+   
+        /////for 
+        mp.update(shedule);
+        
+    }
+    }
+    }
+    
+    
+    }
+   
     private void createGUI(){
         fr.getContentPane().removeAll();
         fr.getContentPane().add(this);
@@ -58,11 +91,11 @@ public class SheduleView extends JPanel
     private class MyJPanel extends JPanel{
         int color_id=0;
         String title ;
-        private JPanel centerPanel= new JPanel();
+        protected JPanel centerPanel= new JPanel();
         private JScrollPane scrollSpecific;
         public MyJPanel(String title){
             this.title=title;
-                        scrollSpecific = new JScrollPane(centerPanel);
+            scrollSpecific = new JScrollPane(centerPanel);
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createLineBorder(Color.black));
             JLabel titleLabel= new JLabel(title);
@@ -71,35 +104,50 @@ public class SheduleView extends JPanel
             setBackground(colors[color_id]);
             titlePanel.setBackground(colors[color_id]);
             add(titlePanel,BorderLayout.PAGE_START);
-          //  add(centerPanel);
-                        add(scrollSpecific,BorderLayout.CENTER);
+            //  add(centerPanel);
+            add(scrollSpecific,BorderLayout.CENTER);
             centerPanel.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
             // example of use
-            for(int j=0;j<10;j++){
-            SingleSheduleView ssv=new SingleSheduleView();
-            centerPanel.add(ssv);
-        }
+            //   for(int j=0;j<10;j++){
+            //     SingleSheduleView ssv=new SingleSheduleView();
+            // centerPanel.add(ssv);
+            // }
             //## end of example
 
         }
 
+        protected void update(Shedule shedule){
+        
+        /// check for shedule in centerPanel id if not exist create
+        /// if exist update text
+        
+        }
         private class SingleSheduleView extends JPanel{
 
             private String activeDays, time, weeklyString, activeString,commandString;
-            int id;
+            protected  int id;
             protected JPanel firstRow,secondRow;
-private JButton delete,edit;
-private Checkbox isWeekly,isActive; 
-            public SingleSheduleView(){
-                
+            private JButton delete,edit;
+            private JCheckBox isWeekly,isActive; 
+            private JButton [] days= new JButton[7];
+            private Shedule shedule;
+
+            public SingleSheduleView(Shedule shedule){
+                activeDays= shedule.getActiveDays();
+                weeklyString=  shedule.getIsWeekly();
+                activeDays=  shedule.getActiveDays();
+                activeString=  shedule.getIsActive();
+                commandString=  shedule.getCommandText();
+                id=shedule.getId();
+                time=shedule.getTime();
                 setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-                            setBorder(BorderFactory.createLineBorder(Color.blue));
+                setBorder(BorderFactory.createLineBorder(Color.blue));
                 firstRow= new JPanel();
                 secondRow= new JPanel();
                 delete= new JButton("delete");
                 edit= new JButton("edit");
-                isWeekly= new Checkbox("is Weekly");
-                isActive= new Checkbox("is isActive");
+                isWeekly= new JCheckBox("is Weekly");
+                isActive= new JCheckBox("is isActive");
                 add(firstRow);
                 add(secondRow);
                 for(int i=0;i<7;i++){
@@ -130,17 +178,97 @@ private Checkbox isWeekly,isActive;
                         dayButton= new JButton("Uknown");
 
                     }
+                    days[i]=dayButton;
                     firstRow.add(dayButton);
                     dayButton.setBackground(colors[0]);
                 }
-                
+
                 secondRow.add(edit);
-                                secondRow.add(isWeekly);
-                                                secondRow.add(isActive);
+                secondRow.add(isWeekly);
+                secondRow.add(isActive);
                 secondRow.add(delete);
 
             }
+
+            private void updateAll(String activeDays,String weeklyString,String activeString){
+                updateDaysEnable(activeDays);
+                updateWeekly(weeklyString);
+                updatActive(activeString);
+            }
+
+            private void updateAll(){
+                updateDaysEnable();
+                updateWeekly();
+                updatActive();
+            }
+
+            protected void updateDaysEnable(String activeDays){
+                this.activeDays=activeDays;
+                updateDaysEnable();
+            }
+
+            protected void updateDaysEnable(){
+
+                Color usingColor=colors[2];
+                if(commandString.endsWith("on")){
+                    usingColor=colors[1];}
+                if(weeklyString.contains(Integer.toString( Calendar.SUNDAY))){
+                    days[0].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.MONDAY))){
+                    days[1].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.TUESDAY))){
+                    days[2].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.WEDNESDAY))){
+                    days[3].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.THURSDAY))){
+                    days[4].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.FRIDAY))){
+                    days[5].setBackground(usingColor);
+                }
+                if(weeklyString.contains(Integer.toString( Calendar.SATURDAY))){
+                    days[6].setBackground(usingColor);
+                }
+
+            
+            }
+
+            protected void updateWeekly(String weeklyString){
+
+                this.weeklyString=weeklyString;
+                updateWeekly();
+            }
+
+            protected void updateWeekly(){
+
+                if(weeklyString.equalsIgnoreCase("true")|| weeklyString.equalsIgnoreCase("enable")){
+                    isWeekly.setSelected(true);
+                }else  if(weeklyString.equalsIgnoreCase("false")|| weeklyString.equalsIgnoreCase("disable")){
+                    isWeekly.setSelected(false);
+                }
+            }
+
+            protected void updatActive(String activeString){
+
+                this.activeString=activeString;
+                updatActive();
+            }
+
+            protected void updatActive(){
+
+                if(activeString.equalsIgnoreCase("true")|| activeString.equalsIgnoreCase("enable")){
+                    isActive.setSelected(true);
+                }else  if(activeString.equalsIgnoreCase("false")|| activeString.equalsIgnoreCase("disable")){
+                    isActive.setSelected(false);
+                }
+            }
+
         }
 
     } 
+
 }

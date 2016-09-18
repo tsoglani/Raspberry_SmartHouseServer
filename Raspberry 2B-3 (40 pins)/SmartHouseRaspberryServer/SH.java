@@ -1156,6 +1156,8 @@ fr.updateManual(); }
                             }
                         }
                     }
+                    if(fr.shv!=null)
+                    fr.shv.update(db.getShedules());
                 }catch(Exception e){
                     System.out.println(e.getMessage());}}
         }}

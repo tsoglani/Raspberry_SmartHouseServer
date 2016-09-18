@@ -19,9 +19,11 @@ public class Fr extends JFrame
     private JButton auto;
     protected boolean isSwitchModeSelected=false;
     protected boolean isTimerModeSelected=false;
+       protected boolean isSheduleModeSelected=false;
     private String state="off";
     protected JButton home;
     protected SH sh;
+    protected  SheduleView shv;
     JToggleButton toggle;
     /**
      * Constructor for objects of class Fr
@@ -55,6 +57,8 @@ public class Fr extends JFrame
                     mainMenu();
                     isSwitchModeSelected=false;
                     isTimerModeSelected=false;
+                    isSheduleModeSelected=false;
+                    shv=null;
                     toggle.setText("Commands Mode");
                 }
             });
@@ -67,7 +71,8 @@ public class Fr extends JFrame
             
               auto.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
-                    new SheduleView(Fr.this);
+                  
+               new SheduleView(Fr.this);
                 }
             });
 
