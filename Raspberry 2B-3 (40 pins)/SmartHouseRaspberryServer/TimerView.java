@@ -100,14 +100,15 @@ public class TimerView extends JPanel
         neededOutputs=fr.sh.getAllCommandOutput();
 
         String [] outputs=neededOutputs.split("@@@");
-
+            add(center);
         center.setLayout(new GridLayout((int)Math.sqrt(usingList.length)+1,(int)Math.sqrt(usingList.length)+1));
+    
         for(int i=0;i<usingList.length;i++){
             ArrayList <String> list=usingList[i];
             MyJPanel button = new MyJPanel(list.get(0));
             switcButtons.add(button);
             center.add(button);
-            add(center);
+
         }
         updateTimers();
 

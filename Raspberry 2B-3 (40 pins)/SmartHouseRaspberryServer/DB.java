@@ -171,13 +171,15 @@ public class DB implements Serializable{
             }}return"addedNotOk";
     }
 
-    public synchronized String updateSingleShedule(String command,String commandID,String commantModeText) {
+    public synchronized void updateSingleShedule(String command,String commandID,String commantModeText) {
 
         int cmdID=Integer.parseInt(commandID);
         if(!conainsCommandInDevice(command)){
-            return null;
+            return ;
         }
-        System.out.println("found command in device for update");
+        
+                System.out.println("found command in device for signle update   #ncommand:"+command+"#ncommandID="+commandID+" commantModeText:"+commantModeText);
+
         System.out.println("commandID= "+commandID);
         // int position = -1;
         Shedule shedule=null;
@@ -208,10 +210,10 @@ public class DB implements Serializable{
 
         if(shedule==null){
             System.out.println("shedule did not found");
-            return null;
+            return ;
 
         }
-        return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
+        sh.sendToAll("updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString());
     }
 
     public synchronized String updateShedule(String command,String commandID) {
@@ -223,7 +225,7 @@ public class DB implements Serializable{
         if(!conainsCommandInDevice(getCommandText(command))){
             return null;
         }
-        System.out.println("found command in device for update");
+        System.out.println("found command in device for update   command:"+command+"#ncommandID="+commandID);
         //   int position = -1;
         Shedule shedule=null;
         int cmdID=Integer.parseInt(commandID);
@@ -269,9 +271,11 @@ public class DB implements Serializable{
         return"UpdatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
     }
 
-    public String removeShedule(String command,String textCommand) {//// px "updateShedule:ID:1"
+    public void removeShedule(String command,String textCommand) {//// px "updateShedule:ID:1"
+        System.out.println("removeShedule::::"+command+"  "+textCommand);
+        
         if(!conainsCommandInDevice(textCommand)){
-            return null;}
+            return ;}
         int remId=Integer.parseInt(command);
         String output=null;
         int position = -1;
@@ -286,8 +290,8 @@ public class DB implements Serializable{
             updateShedule();
         }
         output="removeShedule:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+COMMAND_ID+command;
-
-        return output;
+sh.sendToAll(output);
+      //  return output;
     }
 
     private int getnewID(){
@@ -357,7 +361,9 @@ public class DB implements Serializable{
             }
             rs.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+           // ex.printStackTrace();
+        } catch (Error ex) {
+          //  ex.printStackTrace();
         }
         return array;
     }

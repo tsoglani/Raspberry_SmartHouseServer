@@ -552,6 +552,7 @@ public class SH {
                 } 
             }else if (sentence.startsWith("updateSingleShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
                 //prepei na stelnw device id+
+                //updateSingleShedule:DeviceID:0##CommandID:0##CommandText:kitchen lights on##IsActive:false
                 String usingCommand = sentence.substring(("updateSingleShedule:"+DB.DEVICE_ID).length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
                 String wantedDeviceIDString=list[0];
@@ -563,12 +564,12 @@ public class SH {
 
                     usingCommand=list2[1].substring(DB.COMMAND_TEXT_STRING.length(),list2[1].length());
                     String stringModeModify=list2[2];
-                    String out=  db.updateSingleShedule(usingCommand,wantedCommandID,stringModeModify);//thelw command id edw
-                    if(out!=null){
-                        sendToAll(out);
-                    }
+                   db.updateSingleShedule(usingCommand,wantedCommandID,stringModeModify);//thelw command id edw
+                 
                 } 
             }else if (sentence.startsWith("removeShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
+             
+                //
                 //// px removeShedule(1)" prepei na stelnw device id
                 String usingCommand = sentence.substring(("removeShedule:"+DB.DEVICE_ID).length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
@@ -577,10 +578,9 @@ public class SH {
                 if(Integer.parseInt(wantedDeviceIDString)==DeviceID){
                     usingCommand=list[1].substring((DB.COMMAND_TEXT_STRING).length(),list[1].length());
 
-                    String out=  db.removeShedule(usingCommand,list[2]);//thelw command id edw
+                   db.removeShedule(usingCommand,list[2]);//thelw command id edw
 
-                    if(out!=null)
-                        sendToAll(out);
+                  
                 }
             }
             else if(sentence.equals("getShedules")){
