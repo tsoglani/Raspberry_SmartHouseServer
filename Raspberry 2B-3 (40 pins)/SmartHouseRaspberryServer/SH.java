@@ -520,6 +520,8 @@ public class SH {
                 System.out.println(msg);
             } else  if (sentence.startsWith("saveShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
                 //prepei na stelnw device id
+                
+                ///saveShedule:DeviceID:0##CommandText:kitchen lights##ActiveDays:2 on3 on5 off##ActiveTime:00:00##IsWeekly:true##IsActive:true
                 String usingCommand = sentence.substring("saveShedule:DevideID:".length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
                 String wantedDeviceIDString=list[0];
@@ -1112,12 +1114,18 @@ fr.updateManual(); }
                         if(Boolean.parseBoolean(shedule.getIsActive())){
                             System.out.println("isActive");
                             if(shedule.getActiveDays().contains(getDay(calendar))){
-                                System.out.println("Contains Day");
+                                
+                                    System.out.println("Contains Day");
                                 System.out.println(shedule.getTime()+" timers"+getTime(calendar));
                                 if(shedule.getTime().equals(getTime(calendar))){
                                     System.out.println("Time is equal");
                                     // excecute command
-                                    processCommandString(shedule.getCommandText());
+                                    String extraString=null;
+                                 if(shedule.getActiveDays().contains(getDay(calendar)+" on")){extraString=" on";}
+                                                                  if(shedule.getActiveDays().contains(getDay(calendar)+" off")){extraString=" off";}
+                                                            System.out.println(shedule.getCommandText()+extraString+ "  excecuted");
+                                    processCommandString(shedule.getCommandText()+extraString);
+
                                     if(!Boolean.parseBoolean(shedule.getIsWeekly())){
                                         shedule.setActiveDays((shedule.getActiveDays().replace(getDay(calendar),"")));
                                     }
