@@ -70,7 +70,7 @@ public class SheduleView extends JPanel
                     for(int k=0;k<sheduleList.size();k++){
                         Shedule shedule2=sheduleList.get(k);
                         System.out.print("   shedule2.id"+shedule2.getId());  
-                        if(shedule2.getId()==ssv.id){
+                        if(shedule2.getId()==ssv.id&&shedule2.getCommandText().equals(ssv.commandString)){
                             containsInSheduleList=true;
                             System.out.println("(shedule2.getId()==ssv.id");  
                             break;
@@ -228,7 +228,7 @@ public class SheduleView extends JPanel
             edit = new JButton(editIcon);
 
             isWeekly= new JCheckBox("is Weekly");
-            isActive= new JCheckBox("is isActive");
+            isActive= new JCheckBox("is Active");
             isWeekly.addItemListener(new ItemListener() {
 
                     @Override
@@ -303,8 +303,9 @@ public class SheduleView extends JPanel
             //    secondRow.add(new JLabel("    "),SwingConstants.CENTER);
             //   secondRow.add(new JLabel("    "),SwingConstants.CENTER);
 
-            centerInsideSecondPanel.add(isWeekly,SwingConstants.CENTER);
+         
             centerInsideSecondPanel.add(isActive,SwingConstants.CENTER);
+               centerInsideSecondPanel.add(isWeekly,SwingConstants.CENTER);
             secondRow.add(centerInsideSecondPanel,SwingConstants.CENTER);
             // secondRow.add(new JLabel("    "),SwingConstants.CENTER);
             //             secondRow.add(new JLabel("    "),SwingConstants.CENTER);
