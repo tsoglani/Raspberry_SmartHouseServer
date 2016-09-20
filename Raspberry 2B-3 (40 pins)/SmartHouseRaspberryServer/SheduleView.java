@@ -42,7 +42,7 @@ public class SheduleView extends JPanel
                 boolean containsInMyPanels=false;
                 boolean isGoingToOpen;
                 String timerFullCommand=shedule.getCommandText();
-           
+
                 if(myPanels!=null)
                     for(int j=0;j<myPanels.size();j++){
                         MyJPanel mp=myPanels.get(j);
@@ -90,10 +90,10 @@ public class SheduleView extends JPanel
             }
 
         
-        
         }
 
     }
+
     private void createGUI(){
         fr.getContentPane().removeAll();
         fr.getContentPane().add(this);
@@ -162,11 +162,9 @@ public class SheduleView extends JPanel
             boolean contains=false;
             SingleSheduleView usingSsv=null;
 
-             
             for(int i=0;i<centerPanel.getComponentCount();i++){
                 SingleSheduleView ssv=(SingleSheduleView)centerPanel.getComponent(i);
 
-              
                 if(ssv.id==shedule.getId()){
                     contains=true;
                     usingSsv=ssv;
@@ -257,6 +255,10 @@ public class SheduleView extends JPanel
             centerPanel.add(firstRow);
             centerPanel.add(secondRow);
             timeLabel=new JLabel(time);
+
+            Font f = timeLabel.getFont();
+            f=f.deriveFont (30f);
+            timeLabel.setFont(f.deriveFont(f.getStyle() | Font.BOLD));
             header.add(timeLabel);
             add(centerPanel);
             add(header,BorderLayout.PAGE_START);
@@ -303,19 +305,22 @@ public class SheduleView extends JPanel
             //    secondRow.add(new JLabel("    "),SwingConstants.CENTER);
             //   secondRow.add(new JLabel("    "),SwingConstants.CENTER);
 
-         
             centerInsideSecondPanel.add(isActive,SwingConstants.CENTER);
-               centerInsideSecondPanel.add(isWeekly,SwingConstants.CENTER);
+            centerInsideSecondPanel.add(isWeekly,SwingConstants.CENTER);
             secondRow.add(centerInsideSecondPanel,SwingConstants.CENTER);
             // secondRow.add(new JLabel("    "),SwingConstants.CENTER);
             //             secondRow.add(new JLabel("    "),SwingConstants.CENTER);
             // secondRow.add(edit,SwingConstants.CENTER);
             add(edit,BorderLayout.LINE_START);
             add(delete,BorderLayout.LINE_END);
-
+            edit.addActionListener(new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        fr.isSheduleModeSelected=false;
+                        new EditSheduleView(fr,shedule);
+                    }
+                });
             delete.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
-
 
                         new Thread(){
                             public void run(){
@@ -375,7 +380,6 @@ public class SheduleView extends JPanel
 
         protected void updateDaysEnable(){
 
-        
             if(activeDays.contains(Integer.toString( Calendar.SUNDAY)+" on")){
                 days[0].setBackground(colors[1]);
 
@@ -386,9 +390,8 @@ public class SheduleView extends JPanel
                 days[0].setBackground(colors[0]);
 
             }
-            
-            
-                if(activeDays.contains(Integer.toString( Calendar.MONDAY)+" on")){
+
+            if(activeDays.contains(Integer.toString( Calendar.MONDAY)+" on")){
                 days[1].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.MONDAY)+" off")){
@@ -398,8 +401,8 @@ public class SheduleView extends JPanel
                 days[1].setBackground(colors[0]);
 
             }
-            
-               if(activeDays.contains(Integer.toString( Calendar.TUESDAY)+" on")){
+
+            if(activeDays.contains(Integer.toString( Calendar.TUESDAY)+" on")){
                 days[2].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.TUESDAY)+" off")){
@@ -409,8 +412,8 @@ public class SheduleView extends JPanel
                 days[2].setBackground(colors[0]);
 
             }
-            
-                    if(activeDays.contains(Integer.toString( Calendar.WEDNESDAY)+" on")){
+
+            if(activeDays.contains(Integer.toString( Calendar.WEDNESDAY)+" on")){
                 days[3].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.WEDNESDAY)+" off")){
@@ -420,8 +423,8 @@ public class SheduleView extends JPanel
                 days[3].setBackground(colors[0]);
 
             }
-            
-                      if(activeDays.contains(Integer.toString( Calendar.THURSDAY)+" on")){
+
+            if(activeDays.contains(Integer.toString( Calendar.THURSDAY)+" on")){
                 days[4].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.THURSDAY)+" off")){
@@ -431,8 +434,8 @@ public class SheduleView extends JPanel
                 days[4].setBackground(colors[0]);
 
             }
-            
-                   if(activeDays.contains(Integer.toString( Calendar.FRIDAY)+" on")){
+
+            if(activeDays.contains(Integer.toString( Calendar.FRIDAY)+" on")){
                 days[5].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.FRIDAY)+" off")){
@@ -442,7 +445,7 @@ public class SheduleView extends JPanel
                 days[5].setBackground(colors[0]);
 
             }
-                  if(activeDays.contains(Integer.toString( Calendar.SATURDAY)+" on")){
+            if(activeDays.contains(Integer.toString( Calendar.SATURDAY)+" on")){
                 days[6].setBackground(colors[1]);
 
             } else if(activeDays.contains(Integer.toString( Calendar.SATURDAY)+" off")){
@@ -452,8 +455,7 @@ public class SheduleView extends JPanel
                 days[6].setBackground(colors[0]);
 
             }
-          
-       
+
             System.out.println(weeklyString);
             //setBackground(usingColor);
             //centerPanel.setBackground(usingColor);
