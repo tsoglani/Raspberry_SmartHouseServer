@@ -7,20 +7,29 @@ public class SheduleView extends JPanel
 { private JButton back;
     private Fr fr;
     private  Color []colors = {Color.white,Color.green,Color.red};
-    ArrayList   <MyJPanel> myPanels;
+    private ArrayList   <MyJPanel> myPanels;
+    private JButton addNewSchedule;
     public SheduleView(Fr fr)
     {
         this.fr=fr;
         setLayout(new BorderLayout());
 
-        //    ImageIcon backTime=new ImageIcon("back.png");
-        //   backTime=new ImageIcon(fr.getScaledImage(backTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
-        //      back = new JButton(backTime);
-        //             back = new JButton(backTime);
-        createGUI();
         fr.isSheduleModeSelected=true;
         fr.shv=this;
+        ImageIcon addSchedule=new ImageIcon("add_calentar.png");
+        addSchedule=new ImageIcon(fr.getScaledImage(addSchedule.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
 
+        addNewSchedule = new JButton(addSchedule);
+
+        addNewSchedule.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    fr.isSheduleModeSelected=false;
+                    fr.shv=null;
+                    new SelectNewShedule(fr);
+                }
+            });
+
+        createGUI();
         new Thread(){
             public void run(){
                 while(fr.isSheduleModeSelected)   {
@@ -89,9 +98,7 @@ public class SheduleView extends JPanel
                 centerPanel.revalidate();
             }
 
-        
         }
-
     }
 
     private void createGUI(){
@@ -99,9 +106,9 @@ public class SheduleView extends JPanel
         fr.getContentPane().add(this);
 
         JPanel header=new JPanel();
-        // JPanel bottom=new JPanel();
-        // bottom.setLayout(new BorderLayout());
-
+        JPanel bottom=new JPanel();
+        bottom.setLayout(new BorderLayout());
+        bottom.add(addNewSchedule);
         header.setLayout(new BorderLayout());
         header.add(fr.home,BorderLayout.LINE_END);
         //  header.add(back,BorderLayout.LINE_START);
@@ -109,6 +116,7 @@ public class SheduleView extends JPanel
         JPanel center=new JPanel();
         myPanels=new <MyJPanel> ArrayList();
         add(header,BorderLayout.PAGE_START);
+        add(bottom,BorderLayout.PAGE_END);
         // add(bottom,BorderLayout.PAGE_END);
         ArrayList<String>[] usingList;
         String neededOutputs;
@@ -141,7 +149,7 @@ public class SheduleView extends JPanel
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createLineBorder(Color.black));
             JLabel titleLabel= new JLabel(title);
-titleLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 20));
+            titleLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 20));
             JPanel titlePanel= new JPanel();
             titlePanel.add(titleLabel);
             setBackground(colors[color_id]);
@@ -317,6 +325,8 @@ titleLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 20));
             edit.addActionListener(new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                         fr.isSheduleModeSelected=false;
+
+                        fr.shv=null;
                         new EditSheduleView(fr,shedule);
                     }
                 });
