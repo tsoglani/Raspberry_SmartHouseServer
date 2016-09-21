@@ -40,5 +40,5 @@ comment7.target=java.lang.String\ add(java.lang.String)
 comment8.params=command\ commandID\ commantModeText
 comment8.target=void\ updateSingleShedule(java.lang.String,\ java.lang.String,\ java.lang.String)
 comment9.params=command\ commandID
-comment9.target=java.lang.String\ updateShedule(java.lang.String,\ java.lang.String)
+comment9.target=void\ updateShedule(java.lang.String,\ java.lang.String)
 numComments=21

@@ -141,6 +141,7 @@ public class SheduleView extends JPanel
             setLayout(new BorderLayout());
             setBorder(BorderFactory.createLineBorder(Color.black));
             JLabel titleLabel= new JLabel(title);
+titleLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 20));
             JPanel titlePanel= new JPanel();
             titlePanel.add(titleLabel);
             setBackground(colors[color_id]);

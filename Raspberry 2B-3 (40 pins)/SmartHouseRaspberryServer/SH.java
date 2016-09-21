@@ -547,10 +547,8 @@ public class SH {
 
                     usingCommand=usingCommand.substring((wantedCommandID+DB.COMMAND_SPLIT_STRING).length(),usingCommand.length());
 
-                    String out=  db.updateShedule(usingCommand,wantedCommandID);//thelw command id edw
-                    if(out!=null){
-                        sendToAll(out);
-                    }
+                     db.updateShedule(usingCommand,wantedCommandID);//thelw command id edw
+                    
                 } 
             }else if (sentence.startsWith("updateSingleShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
                 //prepei na stelnw device id+

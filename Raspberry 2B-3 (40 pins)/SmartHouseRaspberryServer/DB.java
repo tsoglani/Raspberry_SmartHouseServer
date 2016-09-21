@@ -177,8 +177,8 @@ public class DB implements Serializable{
         if(!conainsCommandInDevice(command)){
             return ;
         }
-        
-                System.out.println("found command in device for signle update   #ncommand:"+command+"#ncommandID="+commandID+" commantModeText:"+commantModeText);
+
+        System.out.println("found command in device for signle update   #ncommand:"+command+"#ncommandID="+commandID+" commantModeText:"+commantModeText);
 
         System.out.println("commandID= "+commandID);
         // int position = -1;
@@ -191,15 +191,15 @@ public class DB implements Serializable{
                     System.out.println(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
                     // boolean isActive=Boolean.parseBoolean(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
                     shedule.setIsWeekly(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
-                 updateShedule();
+                    updateShedule();
                 }else if(commantModeText.startsWith(IS_ACTIVE)){
                     // boolean isActive=Boolean.parseBoolean(commantModeText.substring(IS_ACTIVE.length()));
                     System.out.println(commantModeText.substring(IS_ACTIVE.length(),commantModeText.length()));
                     shedule.setIsActive(commantModeText.substring(IS_ACTIVE.length(),commantModeText.length()));
-                  updateShedule();
+                    updateShedule();
                 }
                 //   position = i;
-             
+
             }
         }
 
@@ -216,14 +216,14 @@ public class DB implements Serializable{
         sh.sendToAll("updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString());
     }
 
-    public synchronized String updateShedule(String command,String commandID) {
+    public synchronized void updateShedule(String command,String commandID) {
 
         String sendingToAllCommand="";
         //  Shedule shedule = new Shedule();
 
         // System.out.println("command = "+command);
         if(!conainsCommandInDevice(getCommandText(command))){
-            return null;
+            return ;
         }
         System.out.println("found command in device for update   command:"+command+"#ncommandID="+commandID);
         //   int position = -1;
@@ -241,6 +241,7 @@ public class DB implements Serializable{
                 updateShedule();
                 //   position = i;
             }
+
         }
 
         // if (position != -1) {
@@ -249,8 +250,10 @@ public class DB implements Serializable{
         //  }
 
         if(shedule==null){
-            return null;}
-        return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
+            return ;}
+        sh.sendToAll("updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString());
+
+        //   return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
     }
 
     public synchronized String updateShedule(Shedule shedule) {
@@ -273,7 +276,7 @@ public class DB implements Serializable{
 
     public void removeShedule(String command,String textCommand) {//// px "updateShedule:ID:1"
         System.out.println("removeShedule::::"+command+"  "+textCommand);
-        
+
         if(!conainsCommandInDevice(textCommand)){
             return ;}
         int remId=Integer.parseInt(command);
@@ -290,8 +293,8 @@ public class DB implements Serializable{
             updateShedule();
         }
         output="removeShedule:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+COMMAND_ID+command;
-sh.sendToAll(output);
-      //  return output;
+        sh.sendToAll(output);
+        //  return output;
     }
 
     private int getnewID(){
@@ -361,9 +364,9 @@ sh.sendToAll(output);
             }
             rs.close();
         } catch (Exception ex) {
-           // ex.printStackTrace();
+            // ex.printStackTrace();
         } catch (Error ex) {
-          //  ex.printStackTrace();
+            //  ex.printStackTrace();
         }
         return array;
     }
