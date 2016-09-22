@@ -78,6 +78,9 @@ public class Fr extends JFrame
 
         this.setSize((int)width,(int)height);
         mainMenu();
+           setLocation(0,0);
+        setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);    
         setVisible(true);
     }
