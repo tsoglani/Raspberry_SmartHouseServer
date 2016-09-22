@@ -32,6 +32,11 @@ header.setLayout(new BorderLayout());
             centerPanel.setLayout(new GridLayout((int)(Math.sqrt(comboCommandsString.length)+1),(int)(Math.sqrt(comboCommandsString.length)+1)));
             for(String s:comboCommandsString){
                 JButton commandButton= new JButton(s);
+                commandButton.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e ){
+                new AddNewShedule(fr,commandButton.getText());
+                }
+                });
                 centerPanel.add(commandButton);
             }
         }
@@ -56,6 +61,5 @@ header.setLayout(new BorderLayout());
 
     }
     
-    class AddNewShedule extends JPanel{
-    }
+   
 }

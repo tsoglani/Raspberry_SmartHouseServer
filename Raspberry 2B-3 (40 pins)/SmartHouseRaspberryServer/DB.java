@@ -141,6 +141,8 @@ public class DB implements Serializable{
     }
 
     public synchronized String add(String command) {
+        
+        System.out.println("add:::"+command);
         Shedule shedule = new Shedule();
         shedule.setId(getnewID());
         shedule.setActiveDays(getDays(command));
@@ -168,7 +170,8 @@ public class DB implements Serializable{
                 addShedule(shedule);
                 return"DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
 
-            }}return"addedNotOk";
+            }
+        }return"addedNotOk";
     }
 
     public synchronized void updateSingleShedule(String command,String commandID,String commantModeText) {
@@ -347,6 +350,8 @@ public class DB implements Serializable{
             oos.close();
             psInsert.setBytes(1, bos.toByteArray());
             psInsert.executeUpdate();
+            
+            sh.sendToAll("Shedules:"+DEVICE_ID+sh.DeviceID+COMMAND_SPLIT_STRING+getAllSheduleText());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
