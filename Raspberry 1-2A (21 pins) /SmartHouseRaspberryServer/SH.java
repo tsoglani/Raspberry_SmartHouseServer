@@ -206,37 +206,37 @@ public class SH {
             GpioPinDigitalOutput pin=null;
             switch (i) {
                    case 0:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i,PinState.LOW);
                 break;
                 case 1:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i,PinState.LOW);
                 break;
                 case 2:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i,PinState.LOW);
                 break;
                 case 3:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i,PinState.LOW);
                 break;
                 case 4:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i,PinState.LOW);
                 break;
                 case 5:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i,PinState.LOW);
                 break;
                 case 6:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "PinLED" + i,PinState.LOW);
                 break;
                 case 7:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i,PinState.LOW);
                 break;
                 case 8:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i,PinState.LOW);
                 break;
                 case 9:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i,PinState.LOW);
                 break;
                 case 10:
-                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_10, "PinLED" + i);
+                pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_10, "PinLED" + i,PinState.LOW);
                 break;
                 //                     case 8:
                 //                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
@@ -279,6 +279,7 @@ public class SH {
                 //                         break;
 
             }
+pin.low();
             pins[i]=pin;
 
         }
@@ -1173,6 +1174,7 @@ fr.updateManual(); }
                                         }
                                     }
                                     sendToAll("switch "+shedule.getCommandText()+extraString);
+                                   sendTheUpdates(shedule.getCommandText()+extraString);
                                     sendToAll(out);
 
                                 }

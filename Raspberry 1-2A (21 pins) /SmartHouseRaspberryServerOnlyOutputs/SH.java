@@ -199,71 +199,72 @@ private void initArrays(){
 GpioPinDigitalOutput pin=null;
                 switch (i) {
                     case 0:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 1:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 2:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 3:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 4:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 5:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 6:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_06, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 7:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 8:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_08, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 9:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_09, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 10:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_10, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_10, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 11:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_11, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_11, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 12:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_12, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_12, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 13:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_13, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_13, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 14:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_14, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_14, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 15:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_15, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_15, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 16:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 17:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 18:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 19:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                     case 20:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i);
+                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW);
                         break;
                  
 
                 }
+                pin.low();
             pins[i]=pin;
            
               
@@ -1092,6 +1093,7 @@ fr.updateManual(); }
                                         }
                                     }
                                     sendToAll("switch "+shedule.getCommandText()+extraString);
+                                  sendTheUpdates(shedule.getCommandText()+extraString);
                                     sendToAll(out);
 
                                 }
