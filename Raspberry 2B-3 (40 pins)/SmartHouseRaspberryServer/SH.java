@@ -1165,7 +1165,7 @@ fr.updateManual(); }
 
                                         }
                                     }
-                                    sendToAll("switch "+shedule.getCommandText());
+                                    sendToAll("switch "+shedule.getCommandText()+extraString);
                                     sendToAll(out);
 
                                 }

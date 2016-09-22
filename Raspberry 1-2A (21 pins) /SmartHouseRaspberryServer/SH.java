@@ -17,7 +17,7 @@ import java.util.Date;
 public class SH {
 
     private DatagramSocket serverSocket;
-    private DB db;
+    protected DB db;
 
     //// user editable part
     // Pay attention on **
@@ -51,7 +51,7 @@ public class SH {
                 addCommandsAndPorts(i // number of command
                 ,new String[]{"kitchen lights","kitchen light", "koyzina fos","koyzina fota","koyzinas fos","koyzinas fota","fos koyzina","fota koyzina"
                     ,"fos koyzinas","fota koyzinas"},// command text for reaction, the first one ("kitchen lights") is sending to client as command for switch button, the others commands can be used (send) by client with voice-speech
-                    new Integer[]{0,2} // on (receiving) command "kitchen lights","kitchen light", "koyzina fos" .....  these outputs will open or close at once
+                    new Integer[]{0,1} // on (receiving) command "kitchen lights","kitchen light", "koyzina fos" .....  these outputs will open or close at once
                 );
                 break;
 
@@ -59,7 +59,7 @@ public class SH {
                 addCommandsAndPorts(i // command no 1
                 ,new String[]{"room light","room lights","bedroom light","bedroom lights","domatio fos",// command text for reaction
                         "domatio fota","fos domatio","fota domatio" },
-                    new Integer[]{3});// on command 1 these outputs will open or close at once when the previous commands received
+                    new Integer[]{2});// on command 1 these outputs will open or close at once when the previous commands received
                 break;
 
                 case 2:
@@ -68,24 +68,24 @@ public class SH {
                 //ALL commands WITH LATIN LETERS 
                 addCommandsAndPorts(i // number of command 2
                 ,new String[]{"office lights","office light",},// command text for reaction
-                    new Integer[]{7,8} // when command "office lights" or "office lights" received, these outputs will open or close at once .
+                    new Integer[]{3,4} // when command "office lights" or "office lights" received, these outputs will open or close at once .
                 );
                 break;
 
                 case 3:
                 addCommandsAndPorts(i // command no 3
                 ,new String[]{"tv","television" },
-                    new Integer[]{9});// on command 3 these outputs will open or close at once when the previous commands received
+                    new Integer[]{5});// on command 3 these outputs will open or close at once when the previous commands received
                 break;
                 case 4:
                 addCommandsAndPorts(i // command no 4
                 ,new String[]{"computer" },
-                    new Integer[]{12,13});// on command 4 these outputs will open or close at once when the previous commands received
+                    new Integer[]{6,7});// on command 4 these outputs will open or close at once when the previous commands received
                 break;
                 case 5:
                 addCommandsAndPorts(i // command no 4
                 ,new String[]{"all" },
-                    new Integer[]{0,2,3,7,8,9,12,13});// on command 4 these outputs will open or close at once when the previous commands received
+                    new Integer[]{0,1,2,3,4,5,6,7});// on command 4 these outputs will open or close at once when the previous commands received
                 break;
                 //                    case 5:
                 //                     addCommandsAndPorts(i // command no 5
@@ -114,7 +114,7 @@ public class SH {
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
     private final int raspberryOutputs=11;// 0 - 20
     private final int raspberryInputs=10;// 0 - 20
-    private ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
+    protected ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
     private ArrayList<String> ON, OFF;// = "on", OFF = "off";// word you have to use at the end of the command to activate or deactivate
@@ -423,7 +423,7 @@ public class SH {
         }.start();
     }
 
-    private void startReceivingData() throws IOException {
+     private void startReceivingData() throws IOException {
         boolean isOnSwitchView = false;
         serverSocket = new DatagramSocket(port);
         System.out.println("Waiting for data..");
@@ -435,7 +435,7 @@ public class SH {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
             String sentence = new String(receivePacket.getData(), receivePacket.getOffset(), receivePacket.getLength());
-            System.out.println(sentence);
+          //  System.out.println(sentence);
             //             if(!addresses.contains(receivePacket.getAddress()))
             //                 addresses.add(receivePacket.getAddress());
             //             if(!allPorts.contains(receivePacket.getPort()))
@@ -444,7 +444,9 @@ public class SH {
             if(sentence.startsWith("userUniqueID:")){
                 uniqueUserID=sentence.split(DB.USER_ID_SPLIT)[0];
                 sentence=sentence.substring((uniqueUserID+DB.USER_ID_SPLIT).length());
-            }else{System.out.println("No Unique user id");}
+            }else{
+              //  System.out.println("No Unique user id");
+            }
             if (sentence.startsWith("globalReturning")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 String sentence2=sentence.substring("globalReturning".length());
                 if(sentence2.replace(" ","").equalsIgnoreCase(deviceName.replace(" ",""))){
@@ -482,7 +484,15 @@ public class SH {
             || sentence.equalsIgnoreCase("chooseSheduleFunction")|| sentence.equalsIgnoreCase("chooseAutomationFunction")
             || sentence.equalsIgnoreCase("chooseTimerFunction")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 sendData(sentence, receivePacket.getAddress(), receivePacket.getPort());
-
+                final String sent=sentence;
+                new Thread(){
+                public void run(){
+                    try{
+                        
+                                    sendData(sent, receivePacket.getAddress(), receivePacket.getPort());
+                }catch (Exception e){}}
+                }.start();
+            System.out.println(sentence);
             } else if (sentence.startsWith("globalReturning")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 sentence=sentence.substring("globalReturning".length());
                 System.out.println(sentence+" "+deviceName);
@@ -523,6 +533,8 @@ public class SH {
                 System.out.println(msg);
             } else  if (sentence.startsWith("saveShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
                 //prepei na stelnw device id
+                
+                ///saveShedule:DeviceID:0##CommandText:kitchen lights##ActiveDays:2 on3 on5 off##ActiveTime:00:00##IsWeekly:true##IsActive:true
                 String usingCommand = sentence.substring("saveShedule:DevideID:".length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
                 String wantedDeviceIDString=list[0];
@@ -548,13 +560,12 @@ public class SH {
 
                     usingCommand=usingCommand.substring((wantedCommandID+DB.COMMAND_SPLIT_STRING).length(),usingCommand.length());
 
-                    String out=  db.updateShedule(usingCommand,wantedCommandID);//thelw command id edw
-                    if(out!=null){
-                        sendToAll(out);
-                    }
+                     db.updateShedule(usingCommand,wantedCommandID);//thelw command id edw
+                    
                 } 
             }else if (sentence.startsWith("updateSingleShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
                 //prepei na stelnw device id+
+                //updateSingleShedule:DeviceID:0##CommandID:0##CommandText:kitchen lights on##IsActive:false
                 String usingCommand = sentence.substring(("updateSingleShedule:"+DB.DEVICE_ID).length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
                 String wantedDeviceIDString=list[0];
@@ -566,12 +577,12 @@ public class SH {
 
                     usingCommand=list2[1].substring(DB.COMMAND_TEXT_STRING.length(),list2[1].length());
                     String stringModeModify=list2[2];
-                    String out=  db.updateSingleShedule(usingCommand,wantedCommandID,stringModeModify);//thelw command id edw
-                    if(out!=null){
-                        sendToAll(out);
-                    }
+                   db.updateSingleShedule(usingCommand,wantedCommandID,stringModeModify);//thelw command id edw
+                 
                 } 
             }else if (sentence.startsWith("removeShedule")) { // I say than I need all the commands that open ports with each one state ( Example : "kitchen light on" kitchen light is the commands and on or of are the states  )
+             
+                //
                 //// px removeShedule(1)" prepei na stelnw device id
                 String usingCommand = sentence.substring(("removeShedule:"+DB.DEVICE_ID).length(), sentence.length());
                 String []list=usingCommand.split(DB.COMMAND_SPLIT_STRING);
@@ -580,10 +591,9 @@ public class SH {
                 if(Integer.parseInt(wantedDeviceIDString)==DeviceID){
                     usingCommand=list[1].substring((DB.COMMAND_TEXT_STRING).length(),list[1].length());
 
-                    String out=  db.removeShedule(usingCommand,list[2]);//thelw command id edw
+                   db.removeShedule(usingCommand,list[2]);//thelw command id edw
 
-                    if(out!=null)
-                        sendToAll(out);
+                  
                 }
             }
             else if(sentence.equals("getShedules")){
@@ -663,7 +673,7 @@ public class SH {
 
     }
 
-    private String getAllOutput() {
+    protected String getAllOutput() {
 
         String output = new String();
         try {
@@ -700,7 +710,7 @@ public class SH {
         return output;
     }
 
-    private String getAllCommandOutput() {
+    protected String getAllCommandOutput() {
         String output = new String();
         try {
             //GpioController  gpio = GpioFactory.getInstance();
@@ -753,33 +763,33 @@ public class SH {
         return output;
     }
 
-    private int getRealOutLed(int port){
-        int pinID=-1;
-        switch(port){
-            case 0:
-            pinID=0;
-            break;
-            case 2:
-            pinID=1;
-            break;
-            case 3:
-            pinID=2;
-            break;
-            case 7:
-            pinID=3;
-            break;
-            case 8:
-            pinID=4;
-            break;
-            case 9:
-            pinID=5;
-            break; case 12:
-            pinID=6;
-            break;
-            case 13:
-            pinID=7;
-            break;
-        }
+   private int getRealOutLed(int port){
+        int pinID=port;
+//         switch(port){
+//             case 0:
+//             pinID=0;
+//             break;
+//             case 2:
+//             pinID=1;
+//             break;
+//             case 3:
+//             pinID=2;
+//             break;
+//             case 7:
+//             pinID=3;
+//             break;
+//             case 8:
+//             pinID=4;
+//             break;
+//             case 9:
+//             pinID=5;
+//             break; case 12:
+//             pinID=6;
+//             break;
+//             case 13:
+//             pinID=7;
+//             break;
+//         }
 
         return pinID;
     }
@@ -836,7 +846,7 @@ public class SH {
         ToggleLedNo( number, state,true);
     }
 
-    private void ToggleLedNo(int number,String state,boolean isFromInput){
+   private void ToggleLedNo(int number,String state,boolean isFromInput){
         // GpioController  gpio = GpioFactory.getInstance();
         GpioPinDigitalOutput pin = null;
 
@@ -858,10 +868,20 @@ public class SH {
         } else if (state.equalsIgnoreCase( OFF.get(0))) {
             pin.low();
         }
-        //  gpio.shutdown();
+        
+        
+        
+//           String usingString=outputPowerCommands[i].get(j)+""+isDoing;
+//      
+//         if(fr!=null)
+//         fr.changeState(usingString);
+
+if(fr.isSwitchModeSelected){
+fr.updateManual(); }
+
     }
 
-    private boolean processLedString(String input) {
+   protected boolean processLedString(String input) {
         // get a handle to the GPIO controller
         // GpioController  gpio = GpioFactory.getInstance();
         boolean found=false;
@@ -899,7 +919,8 @@ public class SH {
                     } else if (OFF.contains(isDoing)) {
                         pin.low();
                     }
-
+if(fr.isSwitchModeSelected){
+fr.updateManual(); }
                     break;
 
                 }
@@ -928,9 +949,10 @@ public class SH {
         //   gpio.shutdown();
         return found;
     }
-
+     private static Fr fr;
     public static void main(String args[]) throws Exception {
         SH shs = new SH();
+                 fr=new Fr(shs);
         shs.start();
     }
 
@@ -1072,13 +1094,22 @@ public class SH {
     private boolean isSearchingForShedules=true;
     private int secondsSheduleDelay=10;
     private String prevTime;
-    private class SheduleThread extends Thread{
+     private class SheduleThread extends Thread{
         public void run(){
+            new Thread(){
+            public void run(){
+            
+            }
+            }.start();
             while(isSearchingForShedules){
                 try{
 
                     Thread.sleep(secondsSheduleDelay*1000);
                     Calendar calendar=Calendar.getInstance();
+                    
+                      if(fr.shv!=null)
+              
+
                     if(prevTime==null||!prevTime.equals(getTime(calendar))){
                         prevTime=getTime(calendar);
                     }
@@ -1088,12 +1119,18 @@ public class SH {
                         if(Boolean.parseBoolean(shedule.getIsActive())){
                             System.out.println("isActive");
                             if(shedule.getActiveDays().contains(getDay(calendar))){
-                                System.out.println("Contains Day");
+                                
+                                    System.out.println("Contains Day");
                                 System.out.println(shedule.getTime()+" timers"+getTime(calendar));
                                 if(shedule.getTime().equals(getTime(calendar))){
                                     System.out.println("Time is equal");
                                     // excecute command
-                                    processCommandString(shedule.getCommandText());
+                                    String extraString=null;
+                                 if(shedule.getActiveDays().contains(getDay(calendar)+" on")){extraString=" on";}
+                                                                  if(shedule.getActiveDays().contains(getDay(calendar)+" off")){extraString=" off";}
+                                                            System.out.println(shedule.getCommandText()+extraString+ "  excecuted");
+                                    processCommandString(shedule.getCommandText()+extraString);
+
                                     if(!Boolean.parseBoolean(shedule.getIsWeekly())){
                                         shedule.setActiveDays((shedule.getActiveDays().replace(getDay(calendar),"")));
                                     }
@@ -1135,18 +1172,19 @@ public class SH {
 
                                         }
                                     }
-                                    sendToAll("switch "+shedule.getCommandText());
+                                    sendToAll("switch "+shedule.getCommandText()+extraString);
                                     sendToAll(out);
 
                                 }
                             }
                         }
                     }
+                  
                 }catch(Exception e){
                     System.out.println(e.getMessage());}}
         }}
 
-    protected void sendTheUpdates(String command){
+   protected void sendTheUpdates(String command){
         //   System.out.println("outputPowerCommands = "+command);
         String mode=null;
         String shCm=null;
@@ -1164,8 +1202,9 @@ public class SH {
             mode="off"; 
         }
         //if(outputPowerCommands.contains(shCm)){
+        
         for(int j=0;j<outputPowerCommands.length;j++){
-
+    System.out.println("shCm="+shCm+"  vs"+outputPowerCommands[j].get(0));
             if(outputPowerCommands[j].get(0).equals(shCm)){
                 for(int h=0;h<activatePortOnCommand[j].size();h++){
                     //
@@ -1174,8 +1213,12 @@ public class SH {
 
                         if(pins[p].getPin().getAddress()== activatePortOnCommand[j].get(h)){
 
-                            System.out.println(DeviceID+ " switch "+p+" "+mode);
-                            sendToAll("switch "+DeviceID+ " output "+p+" "+mode);
+                            
+                            int sendid=getRealOutLed(p);
+System.out.println("switch "+outputCommands[p].get(0)+" "+mode );
+                     //    System.out.println("switch "+DeviceID+ " output "+sendid+" "+mode);
+                           // sendToAll("switch "+DeviceID+ " output "+sendid+" "+mode);
+                              sendToAll("switch "+outputCommands[p].get(0)+" "+mode );
                         }
                     }
 
@@ -1206,6 +1249,7 @@ public class SH {
                                 }
                                 if(isActive){
                                     sendToAll("switch "+outputPowerCommands[k].get(0)+" "+mode);
+                                    
                                 }
                             }
                             // System.out.println("update 2 switch "+outputPowerCommands[k].get(0)+" "+mode);
@@ -1304,6 +1348,9 @@ if(isHight)
         // 
         //             }
         //         }}
+        
+        if(fr.isSwitchModeSelected){
+fr.updateManual(); }
     }
 
     private GpioPinDigitalOutput getPinFromOutput(int output){

@@ -42,7 +42,7 @@ public class DB implements Serializable{
             }};
     private Connection conn_costumer;
     private Connection conn_flower;
-    private final String shedule_table = "MY_SHEDULE_TABLE";
+    private final String shedule_table = "MY_FOURTY_PINS_INANDOUT_SHEDULE_TABLE";
     private SH sh;
     public DB(SH sh) {
         this.sh=sh;

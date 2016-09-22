@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Sun Mar 20 15:55:37 EET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0153-944f-310d-000000528ee8 
-on database directory /home/pi/Desktop/github/SmartHouse/SmartHouseRaspberryServer/MY_SHEDULE_TABLE  with class loader sun.misc.Launcher$AppClassLoader@644d46 
-Loaded from file:/home/pi/Desktop/github/SmartHouse/derby.jar
+Thu Sep 22 15:54:39 UTC 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0157-529b-1b90-00000097fd80 
+on database directory /home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 1-2A (21 pins) /SmartHouseRaspberryServer/MY_TWENTYONE_INANDOUT_SHEDULE_TABLE  with class loader sun.misc.Launcher$AppClassLoader@dad5dc 
+Loaded from file:/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry%202B-3%20(40%20pins)/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0-b132
-user.dir=/home/pi/Desktop/github/SmartHouse/SmartHouseRaspberryServer
+java.runtime.version=1.8.0_65-b17
+user.dir=/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 1-2A (21 pins) /SmartHouseRaspberryServer
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
