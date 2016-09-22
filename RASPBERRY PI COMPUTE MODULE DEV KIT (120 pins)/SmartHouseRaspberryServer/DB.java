@@ -42,7 +42,7 @@ public class DB implements Serializable{
             }};
     private Connection conn_costumer;
     private Connection conn_flower;
-    private final String shedule_table = "MY_SHEDULE_TABLE";
+    private final String shedule_table = "MY_MODULE_INANDOUT_SHEDULE_TABLE";
     private SH sh;
     public DB(SH sh) {
         this.sh=sh;
@@ -141,6 +141,8 @@ public class DB implements Serializable{
     }
 
     public synchronized String add(String command) {
+        
+        System.out.println("add:::"+command);
         Shedule shedule = new Shedule();
         shedule.setId(getnewID());
         shedule.setActiveDays(getDays(command));
@@ -168,16 +170,19 @@ public class DB implements Serializable{
                 addShedule(shedule);
                 return"DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
 
-            }}return"addedNotOk";
+            }
+        }return"addedNotOk";
     }
 
-    public synchronized String updateSingleShedule(String command,String commandID,String commantModeText) {
+    public synchronized void updateSingleShedule(String command,String commandID,String commantModeText) {
 
         int cmdID=Integer.parseInt(commandID);
         if(!conainsCommandInDevice(command)){
-            return null;
+            return ;
         }
-        System.out.println("found command in device for update");
+
+        System.out.println("found command in device for signle update   #ncommand:"+command+"#ncommandID="+commandID+" commantModeText:"+commantModeText);
+
         System.out.println("commandID= "+commandID);
         // int position = -1;
         Shedule shedule=null;
@@ -189,15 +194,15 @@ public class DB implements Serializable{
                     System.out.println(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
                     // boolean isActive=Boolean.parseBoolean(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
                     shedule.setIsWeekly(commantModeText.substring(IS_WEEKLY.length(),commantModeText.length()));
-                 updateShedule();
+                    updateShedule();
                 }else if(commantModeText.startsWith(IS_ACTIVE)){
                     // boolean isActive=Boolean.parseBoolean(commantModeText.substring(IS_ACTIVE.length()));
                     System.out.println(commantModeText.substring(IS_ACTIVE.length(),commantModeText.length()));
                     shedule.setIsActive(commantModeText.substring(IS_ACTIVE.length(),commantModeText.length()));
-                  updateShedule();
+                    updateShedule();
                 }
                 //   position = i;
-             
+
             }
         }
 
@@ -208,22 +213,22 @@ public class DB implements Serializable{
 
         if(shedule==null){
             System.out.println("shedule did not found");
-            return null;
+            return ;
 
         }
-        return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
+        sh.sendToAll("updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString());
     }
 
-    public synchronized String updateShedule(String command,String commandID) {
+    public synchronized void updateShedule(String command,String commandID) {
 
         String sendingToAllCommand="";
         //  Shedule shedule = new Shedule();
 
         // System.out.println("command = "+command);
         if(!conainsCommandInDevice(getCommandText(command))){
-            return null;
+            return ;
         }
-        System.out.println("found command in device for update");
+        System.out.println("found command in device for update   command:"+command+"#ncommandID="+commandID);
         //   int position = -1;
         Shedule shedule=null;
         int cmdID=Integer.parseInt(commandID);
@@ -239,6 +244,7 @@ public class DB implements Serializable{
                 updateShedule();
                 //   position = i;
             }
+
         }
 
         // if (position != -1) {
@@ -247,8 +253,10 @@ public class DB implements Serializable{
         //  }
 
         if(shedule==null){
-            return null;}
-        return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
+            return ;}
+        sh.sendToAll("updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString());
+
+        //   return"updatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
     }
 
     public synchronized String updateShedule(Shedule shedule) {
@@ -269,9 +277,11 @@ public class DB implements Serializable{
         return"UpdatedOk:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+shedule.toString();
     }
 
-    public String removeShedule(String command,String textCommand) {//// px "updateShedule:ID:1"
+    public void removeShedule(String command,String textCommand) {//// px "updateShedule:ID:1"
+        System.out.println("removeShedule::::"+command+"  "+textCommand);
+
         if(!conainsCommandInDevice(textCommand)){
-            return null;}
+            return ;}
         int remId=Integer.parseInt(command);
         String output=null;
         int position = -1;
@@ -286,8 +296,8 @@ public class DB implements Serializable{
             updateShedule();
         }
         output="removeShedule:DeviceID:"+SH.DeviceID+COMMAND_SPLIT_STRING+COMMAND_ID+command;
-
-        return output;
+        sh.sendToAll(output);
+        //  return output;
     }
 
     private int getnewID(){
@@ -340,6 +350,8 @@ public class DB implements Serializable{
             oos.close();
             psInsert.setBytes(1, bos.toByteArray());
             psInsert.executeUpdate();
+            
+            sh.sendToAll("Shedules:"+DEVICE_ID+sh.DeviceID+COMMAND_SPLIT_STRING+getAllSheduleText());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -357,7 +369,9 @@ public class DB implements Serializable{
             }
             rs.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            // ex.printStackTrace();
+        } catch (Error ex) {
+            //  ex.printStackTrace();
         }
         return array;
     }
