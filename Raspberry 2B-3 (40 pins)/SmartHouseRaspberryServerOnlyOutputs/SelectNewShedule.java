@@ -40,7 +40,7 @@ header.setLayout(new BorderLayout());
                 centerPanel.add(commandButton);
             }
         }
-        ImageIcon backTime=new ImageIcon("back.png");
+        ImageIcon backTime=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/back.png");
         backTime=new ImageIcon(fr.getScaledImage(backTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         JButton     back = new JButton(backTime);
         back.addActionListener(new ActionListener(){

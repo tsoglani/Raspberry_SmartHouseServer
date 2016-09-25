@@ -14,10 +14,10 @@ public class NewTimerView extends JPanel{
     {
         setLayout(new BorderLayout());
         this.fr=fr;
-        ImageIcon backTime=new ImageIcon("back.png");
+        ImageIcon backTime=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/back.png");
         backTime=new ImageIcon(fr.getScaledImage(backTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         back = new JButton(backTime);
-        ImageIcon saveIcon=new ImageIcon("save.png");
+        ImageIcon saveIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/save.png");
         saveIcon=new ImageIcon(fr.getScaledImage(saveIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         back = new JButton(backTime);
         save = new JButton(saveIcon);

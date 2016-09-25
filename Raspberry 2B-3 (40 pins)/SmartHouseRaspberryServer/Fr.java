@@ -36,19 +36,19 @@ public class Fr extends JFrame
         width=screenSize.getWidth();
         height=screenSize.getHeight();
 
-        ImageIcon homeIcon=new ImageIcon("home.png");
+        ImageIcon homeIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/home.png");
         homeIcon=new ImageIcon(getScaledImage(homeIcon.getImage(),(int)(height/20), (int)(height/20)));
         
         
-        ImageIcon manualIcon=new ImageIcon("manual.png");
+        ImageIcon manualIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/manual.png");
         manualIcon=new ImageIcon(getScaledImage(manualIcon.getImage(),(int)(width/4), (int)(3*height/5)));
         
         manual= new JButton(manualIcon);
       toggle=new JToggleButton("Commands Mode");
-         ImageIcon timelIcon=new ImageIcon("time.png");
+         ImageIcon timelIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/time.png");
         timelIcon=new ImageIcon(getScaledImage(timelIcon.getImage(),(int)(width/4), (int)(3*height/5)));
       timer= new JButton(timelIcon);
-               ImageIcon automationIcon=new ImageIcon("automation.png");
+               ImageIcon automationIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/automation.png");
         automationIcon=new ImageIcon(getScaledImage(automationIcon.getImage(),(int)(width/4), (int)(3*height/5)));
         auto= new JButton(automationIcon);
         home= new JButton(homeIcon);
@@ -78,9 +78,9 @@ public class Fr extends JFrame
 
         this.setSize((int)width,(int)height);
         mainMenu();
-    //    setLocation(0,0);
-   //     setUndecorated(true);
-    //    getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        setLocation(0,0);
+      setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         setDefaultCloseOperation(EXIT_ON_CLOSE);    
         setVisible(true);
     }

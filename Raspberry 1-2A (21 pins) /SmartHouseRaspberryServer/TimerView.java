@@ -21,16 +21,16 @@ public class TimerView extends JPanel
     {
         this.fr=fr;
         fr.isTimerModeSelected=true;
-        ImageIcon addTime=new ImageIcon("add_timer.png");
+        ImageIcon addTime=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/add_timer.png");
         addTime=new ImageIcon(fr.getScaledImage(addTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         addTimeButton = new JButton(addTime);
 
-        ImageIcon deleteIcon=new ImageIcon("trash.png");
+        ImageIcon deleteIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/trash.png");
         deleteIcon=new ImageIcon(fr.getScaledImage(deleteIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         deleteButton = new JButton(deleteIcon);
         bottomPanel.setLayout(new GridLayout(1,3));
 
-        ImageIcon cancelIcon=new ImageIcon("cancel3.png");
+        ImageIcon cancelIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/cancel3.png");
         cancelIcon=new ImageIcon(fr.getScaledImage(cancelIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         cancelButton = new JButton(cancelIcon);
 

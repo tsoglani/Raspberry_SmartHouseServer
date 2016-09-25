@@ -63,7 +63,7 @@ public class AddNewShedule extends JPanel
         centerPanel= new JPanel();
         header= new JPanel();
         header.setLayout(new BorderLayout());
-        ImageIcon backTime=new ImageIcon("back.png");
+        ImageIcon backTime=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/back.png");
         backTime=new ImageIcon(fr.getScaledImage(backTime.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         back = new JButton(backTime);
         back.addActionListener(new ActionListener(){
@@ -140,12 +140,12 @@ minLabel.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 20));
         firstRow.setLayout (new GridLayout(1,7));
         secondRow= new JPanel();
 
-        cancelIcon=new ImageIcon("cancel3.png");
+        cancelIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/cancel3.png");
         cancelIcon=new ImageIcon(fr.getScaledImage(cancelIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
 
         cancel= new JButton(cancelIcon);
 
-        ImageIcon saveIcon=new ImageIcon("save.png");
+        ImageIcon saveIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/save.png");
         saveIcon=new ImageIcon(fr.getScaledImage(saveIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
         save = new JButton(saveIcon);
 

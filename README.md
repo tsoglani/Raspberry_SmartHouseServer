@@ -29,6 +29,8 @@ Select the project you need.
 In every "main" folder there is a read me file with instructions.
 
 
+- the project must be on Desktop Folder else images will not display
+
 
 
 Good luck ;)

@@ -16,7 +16,7 @@ public class SheduleView extends JPanel
 
         fr.isSheduleModeSelected=true;
         fr.shv=this;
-        ImageIcon addSchedule=new ImageIcon("add_calentar.png");
+        ImageIcon addSchedule=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/add_calentar.png");
         addSchedule=new ImageIcon(fr.getScaledImage(addSchedule.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
 
         addNewSchedule = new JButton(addSchedule);
@@ -223,14 +223,14 @@ public class SheduleView extends JPanel
             firstRow.setLayout (new GridLayout(1,7));
             secondRow= new JPanel();
 
-            deleteAmbIcon=new ImageIcon("delete_amb.png");
+            deleteAmbIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/delete_amb.png");
             deleteAmbIcon=new ImageIcon(fr.getScaledImage(deleteAmbIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
 
-            deleteIcon=new ImageIcon("delete.png");
+            deleteIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/delete.png");
             deleteIcon=new ImageIcon(fr.getScaledImage(deleteIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
             delete = new JButton(deleteIcon);
 
-            ImageIcon editIcon=new ImageIcon("edit.png");
+            ImageIcon editIcon=new ImageIcon("/home/pi/Desktop/Raspberry_SmartHouseServer/Raspberry 2B-3 (40 pins)/SmartHouseRaspberryServer/edit.png");
             editIcon=new ImageIcon(fr.getScaledImage(editIcon.getImage(),(int)(fr.height/15), (int)(fr.height/15)));
             edit = new JButton(editIcon);
 
