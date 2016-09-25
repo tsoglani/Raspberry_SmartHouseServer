@@ -79,4 +79,9 @@ sudo java -jar /home/pi/Desktop/SmartHouseServer/SmartHouseServer.jar
 exit 0
 "
 
+finally a costume map to raspberry pi 3 (40 pin led)
+->https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/images/raspberry_pi_3_40_pin_led_map.jpg
+
+
+
 Enjoy...
