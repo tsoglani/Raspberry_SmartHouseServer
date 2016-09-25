@@ -96,12 +96,12 @@ public class SH {
                   case 6:
                     addCommandsAndPorts(i // command no 6
                     ,new String[]{"garage" },
-                   new Integer[]{17,18,19});// on command 6 these outputs will open or close at once when the previous commands received
+                   new Integer[]{1,2});// on command 6 these outputs will open or close at once when the previous commands received
                    break;
                    case 7:
                     addCommandsAndPorts(i // command no 7
                     ,new String[]{"toilet light","toilet lights" },
-                   new Integer[]{20,0});// on command 7 these outputs will open or close at once when the previous commands received
+                   new Integer[]{21,22});// on command 7 these outputs will open or close at once when the previous commands received
      break;
     
     }
@@ -116,7 +116,7 @@ public class SH {
      
     protected ArrayList<String>[] outputPowerCommands = new ArrayList[NumberOfBindingCommands];
     private ArrayList<Integer>[] activatePortOnCommand = new ArrayList[NumberOfBindingCommands];
-    private final int raspberryOutputs=30;// 0 - 27
+    private final int raspberryOutputs=26;// 0 - 16,21-29
     protected ArrayList<String>[] outputCommands = new ArrayList[raspberryOutputs];
     private ArrayList<GpioPinDigitalInput>[] inputButtons = new ArrayList[raspberryOutputs];
     private  GpioPinDigitalOutput pins[]= new  GpioPinDigitalOutput[raspberryOutputs];
@@ -250,45 +250,33 @@ GpioPinDigitalOutput pin=null;
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_16, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
                     case 17:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
-                        break;
-                    case 18:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
-                        break;
-                    case 19:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_19, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
-                        break;
-                    case 20:
-                        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_20, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
-                        break;
-  case 21:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_21, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 22:
+                    case 18:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_22, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 23:
+                    case 19:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_23, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 24:
+                    case 20:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_24, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 25:
+  case 21:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_25, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 26:
+  case 22:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_26, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 27:
+  case 23:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_27, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 28:
+  case 24:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_28, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-  case 29:
+  case 25:
                         pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "PinLED" + i,com.pi4j.io.gpio.PinState.LOW );
                         break;
-                 
+ 
 
                 }
                 pin.low();
@@ -392,9 +380,9 @@ GpioPinDigitalOutput pin=null;
                     break;
             }
             myButton.addListener(new GpioUsageExampleListener(outputCommands[i].get(0)));
-
+myButton.setShutdownOptions(true, com.pi4j.io.gpio.PinState.LOW);
         }
-gpio.shutdown();
+//gpio.shutdown();
     }
 
     private void initStates() {

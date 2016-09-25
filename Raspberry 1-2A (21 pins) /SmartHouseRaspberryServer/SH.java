@@ -283,7 +283,7 @@ pin.low();
             pins[i]=pin;
 
         }
-        gpio.shutdown();
+       // gpio.shutdown();
     }
 
     private void initInputListeners() {
@@ -295,42 +295,42 @@ pin.low();
             GpioPinDigitalInput myButton = null;
             switch (i) {
             case 0:
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_11, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_11,com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
                 case 1:// commands for input no 1
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_12, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_12, com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 2://commands for input no 2
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_13, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_13,com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 3:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_14, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_14,com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 4:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_15, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_15, com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 5:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_16, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_16,com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 6:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_17, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_17, com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
 
                 case 7:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_18, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_18, com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
                
                 case 8:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19, "MyButton" + i);                 
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_19,com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);                 
                 break;
                
                 case 9:// commands for input no 3
-                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_20, "MyButton" + i);
+                myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_20, com.pi4j.io.gpio.PinPullResistance.PULL_DOWN);
                 break;
                 //                 case 8:// commands for input no 3
                 //                     myButton = gpio.provisionDigitalInputPin(RaspiPin.GPIO_17, "MyButton" + i);
@@ -386,9 +386,9 @@ pin.low();
                 //                     break;
             }
             myButton.addListener(new GpioUsageExampleListener(i));
-
+myButton.setShutdownOptions(true, com.pi4j.io.gpio.PinState.LOW);
         }
-        gpio.shutdown();
+       // gpio.shutdown();
     }
 
     private void initStates() {
