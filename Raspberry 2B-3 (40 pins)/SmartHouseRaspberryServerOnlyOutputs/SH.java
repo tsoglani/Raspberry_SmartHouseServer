@@ -442,6 +442,9 @@ myButton.setShutdownOptions(true, com.pi4j.io.gpio.PinState.LOW);
             }else{
               //  System.out.println("No Unique user id");
             }
+ if (sentence.startsWith("speech@@@")){
+sentence=sentence.substring("speech@@@".length(),sentence.length())
+}
             if (sentence.startsWith("globalReturning")) {// used when connect for first time and send ok back, when the android receive the ok open to next view
                 String sentence2=sentence.substring("globalReturning".length());
                 if(sentence2.replace(" ","").equalsIgnoreCase(deviceName.replace(" ",""))){
