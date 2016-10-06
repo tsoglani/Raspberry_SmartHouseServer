@@ -4,7 +4,7 @@ STEPS:
 
 on Raspberry side: 
 1)
- download www.waveshare.com/w/upload/3/3d/LCD-show-160811.tar.gz
+ www.waveshare.com/w/upload/9/9d/LCD-show-151020.tar.gz
 
 2)
 On Terminal
@@ -29,4 +29,4 @@ go to /home/pi/Downloads/LCD-show or whatever your file location. Open that fold
 5)
 COMMAND LINE 
 cd /home/pi/Downloads/LCD-show   (if it is located on Download folder)
-sudo ./LCD-show
+sudo ./LCD-show  example (sudo ./LCD5-show)
