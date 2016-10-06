@@ -11,7 +11,7 @@ imports libs:
 
 - sudo apt-get update                                           ////--update
 - curl -s get.pi4j.com | sudo bash                              ////--update
-- sudo apt-get install pi4j or pi4j                            // update the raspberry libs
+- sudo apt-get install pi4j                             // update the raspberry libs
 - imports all libraries from  /opt/pi4j/lib                   /// tools->preferences->Libraries->Add
 - imports derby.jar and derbyclient.jar from poject's folder /// tools->preferences->Libraries->Add
 - restart bluej

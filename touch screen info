@@ -18,7 +18,9 @@ hdmi_cvt 800 480 60 6 0 0 0
 "
 
 3)
-go to Download folder "cd Download" ( or go to the folder you download the .gz file ) and excecute the .gz file  example ->" tar xzvf /boot/LCD-show-YYMMDD.tar.gz "
+go to Download folder "cd Download" ( or go to the folder you download the .gz file ) 
+and excecute the .gz file  
+example ->" tar xzvf /boot/LCD-show-YYMMDD.tar.gz "
 
 4)
 NOT COMMAND LINE
