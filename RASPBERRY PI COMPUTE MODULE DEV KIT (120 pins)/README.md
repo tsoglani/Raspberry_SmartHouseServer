@@ -69,4 +69,7 @@ sudo java -jar /home/pi/Desktop/SmartHouseServer/SmartHouseServer.jar
 exit 0
 "
 
+
+to activate TOUCH SCREEN ->https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/touch%20screen%20info
+
 Enjoy...

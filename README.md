@@ -36,6 +36,8 @@ In every "main" folder there is a read me file with instructions.
 - the project must be on Desktop Folder else images will not display
 
 
+to activate TOUCH SCREEN ->https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/touch%20screen%20info
+
 
 Good luck ;)
 
