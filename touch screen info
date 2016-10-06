@@ -5,7 +5,7 @@ STEPS:
 on Raspberry side: 
 1)
 - www.waveshare.com/w/upload/9/9d/LCD-show-151020.tar.gz
-//-www.spotpear.com/download/diver24-5/LCD-show-151102.tar.gz
+-www.waveshare.com/w/upload/3/37/LCD-show-151102.tar.gz
 2)
 On Terminal
 sudo nano /boot/config.txt
