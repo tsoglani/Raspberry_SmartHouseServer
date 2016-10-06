@@ -6,9 +6,16 @@ on Raspberry side:
 1)
 - www.waveshare.com/w/upload/9/9d/LCD-show-151020.tar.gz
 -www.waveshare.com/w/upload/3/37/LCD-show-151102.tar.gz
+-www.raspberrypiwiki.com/images/0/08/LCD-show-160715.zip
+
+
 2)
 On Terminal
-sudo nano /boot/config.txt
+
+-sudo raspi-config
+Enable Boot to Desktop/Scratch -> Desktop Log in as user 'pi' at the graphical desktop 
+
+-sudo nano /boot/config.txt
  enter screen conf. dimension for example in 5 inches screen 800x480 enter the text below
 "
 max_usb_current=1
