@@ -16,7 +16,9 @@ In both project, you can send commands from your computer, android, wearable-wat
 -sudo apt-get install raspberrypi-ui-mods  // touch screen plugins   
 -sudo apt-get install raspberrypi-net-mods  // touch screen plugins                
 -curl -s get.pi4j.com | sudo bash    ////--update
--sudo apt-get install pi4j or pi4j   ////--update                    /// update the raspberry libs
+-sudo apt-get install pi4j  /// update the raspberry libs
+
+
 
 
 imports libs:

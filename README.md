@@ -15,7 +15,11 @@ After this you will see two Folders, each one contains one Project, the projects
  -SmartHouseRaspberryServerOnlyOutputs: all pins have been used as ouptputs and you have no inputs ( for example: not recommended for light switching). 
 
 
+NOTE - Defauld raspbian browser might not let you download or clone the project from github, if that happened, install firefox browser "apt-get install iceweasel" 
+//// must excecuted after "sudo apt-get update" 
+
 After you download and run the selected project, you would be able to control remotely your raspberry device with the applications below:
+
 
 -Free (beta) application, works on any computer device: "https://github.com/tsoglani/Java_SmartHouseClient/blob/master/SmartHouseClient/dist/SmartHouseClient.jar".       
 NOTE : need to have Java sdk to your computer device (if not, this is the link -> http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)

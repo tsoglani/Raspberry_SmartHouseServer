@@ -1,0 +1,30 @@
+ENABLE TOUCH SCREEN
+
+STEPS:
+
+on Raspberry side: 
+1)
+ download www.waveshare.com/w/upload/3/3d/LCD-show-160811.tar.gz
+
+2)
+On Terminal
+sudo nano /boot/config.txt
+ enter screen conf. dimension for example in 5 inches screen 800x480 enter the text below
+"
+max_usb_current=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt 800 480 60 6 0 0 0
+"
+
+3)
+go to Download folder "cd Download" ( or go to the folder you download the .gz file ) and excecute the .gz file  example ->" tar xzvf /boot/LCD-show-YYMMDD.tar.gz "
+
+4)
+NOT COMMAND LINE
+go to /home/pi/Downloads/LCD-show or whatever your file location. Open that folder and edit "cmdline.txt" file... from "root=/dev/mmcblkop2" - "root=/dev/mmcblkop7" .
+
+5)
+COMMAND LINE 
+cd /home/pi/Downloads/LCD-show   (if it is located on Download folder)
+sudo ./LCD-show
