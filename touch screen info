@@ -36,5 +36,5 @@ the raspberry will auto restart
 
 6) after restart
 COMMAND LINE
-cd /home/pi/Downloads/LCDD-show
+cd /home/pi/Downloads/LCD-show
 sudo dpkg -i xinput-calibrator_0.7.5-1_armhf.deb
