@@ -11,10 +11,6 @@ on Raspberry side:
 
 2)
 On Terminal
-
--sudo raspi-config
-Enable Boot to Desktop/Scratch -> Desktop Log in as user 'pi' at the graphical desktop 
-
 -sudo nano /boot/config.txt
  enter screen conf. dimension for example in 5 inches screen 800x480 enter the text below
 "
@@ -47,4 +43,4 @@ cd /home/pi/Downloads/LCD-show
 sudo dpkg -i xinput-calibrator_0.7.5-1_armhf.deb
 
 
-http://www.waveshare.com/wiki/5inch_HDMI_LCD_(B)_(Firmware_Rev_2.1)_User_Manual
+
