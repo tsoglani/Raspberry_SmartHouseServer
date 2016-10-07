@@ -380,7 +380,7 @@ myButton.setShutdownOptions(true, com.pi4j.io.gpio.PinState.LOW);
             }
 
  if (sentence.startsWith("speech@@@")){
-sentence=sentence.substring("speech@@@".length(),sentence.length())
+sentence=sentence.substring("speech@@@".length(),sentence.length());
 }
 
 
