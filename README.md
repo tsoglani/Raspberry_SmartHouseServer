@@ -21,10 +21,10 @@ NOTE - Defauld raspbian browser might not let you download or clone the project 
 After you download and run the selected project, you would be able to control remotely your raspberry device with the applications below:
 
 
--Free (beta) application, works on any computer device: "https://github.com/tsoglani/Java_SmartHouseClient/blob/master/SmartHouseClient/dist/SmartHouseClient.jar".       
-NOTE : need to have Java sdk to your computer device (if not, this is the link -> http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+-Free (beta) application, works on any computer device:[Desktop client](https://github.com/tsoglani/Java_SmartHouseClient/blob/master/SmartHouseClient/dist/SmartHouseClient.jar)).       
+NOTE : need to have Java sdk to your computer device (if not, this is the link -> [Java jdk](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html))
 
--Paid (Android phone- Android wear(watch)) application: "https://play.google.com/store/apps/details?id=com.smart.tsoglani.smarthouse
+-Paid (Android phone- Android wear(watch)) application: not uploaded yet
 
 Recommended : download free testing version before buy it to be sure that is working for you.
 
@@ -36,8 +36,8 @@ In every "main" folder there is a read me file with instructions.
 - the project must be on Desktop Folder else images will not display
 
 
-to activate TOUCH SCREEN ->https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/touch%20screen%20info
+to activate TOUCH SCREEN -> [touch screen](https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/touch%20screen%20info)
 
 
 Good luck ;)
-
+License: [GNU AGPLv3](https://github.com/tsoglani/Raspberry_SmartHouseServer/blob/master/LICENSE.txt)
