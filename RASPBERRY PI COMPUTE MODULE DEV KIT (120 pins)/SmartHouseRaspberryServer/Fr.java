@@ -68,7 +68,20 @@ public class Fr extends JFrame
                     new TimerView(Fr.this);
                 }
             });
-            
+             toggle.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+
+                    if(!toggle.isSelected()){
+
+                        toggle.setText("Commands Mode");
+                        manualSelected();
+                    }else{
+                        toggle.setText("Output Mode");
+                        manualSelected();
+
+                    }
+                }
+            });
               auto.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
                   
@@ -109,20 +122,7 @@ public class Fr extends JFrame
         JPanel center=new JPanel();
         switcButtons=new <JButton> ArrayList();
         isSwitchModeSelected=true;
-        toggle.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-
-                    if(!toggle.isSelected()){
-
-                        toggle.setText("Commands Mode");
-                        manualSelected();
-                    }else{
-                        toggle.setText("Output Mode");
-                        manualSelected();
-
-                    }
-                }
-            });
+       
         header.setLayout(new BorderLayout());
         home.setSize((int)(height/20), (int)(height/20));
         header.add(home,BorderLayout.LINE_START);
